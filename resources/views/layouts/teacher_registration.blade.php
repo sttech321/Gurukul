@@ -3,7 +3,7 @@
 @section('content')
 <div class="container mx-auto p-6">
     <div class="box">
-        <a class="button1" href="#popup1" onclick="openPopup('add')">Add new teacher</a>
+        <a class="btn btn-primary" href="#popup1" onclick="openPopup('add')">Add new teacher</a>
     </div>
        <!-- Teacher List Table -->
    <h1 class="text-center">Teacher Registration Page</h1><br>
@@ -14,20 +14,20 @@
     @endif
 
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <table class="table table-striped">
+            <thead class="">
                 <tr>
                     <th scope="col" class="px-6 py-3">
-                        Gurukul Name
+                        Teacher Name
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Address
+                        Branch
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Guru Name
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Mobile Number
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Trust Name
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Action
@@ -36,8 +36,8 @@
             </thead>
             <tbody>
             @foreach($teacher as $registration)
-                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <tr class="">
+                    <td class="px-6 py-4">
                     {{ $registration->name }}
                     </td>
                     <td class="px-6 py-4">
@@ -50,7 +50,7 @@
                     {{ $registration->mobile_number }}
                     </td>
                     <td class="px-6 py-4">
-                        <a href="#popup2" class="edit-gurukul" onclick="editstudentform({{ $registration->id }})">Edit</a>
+                        <a href="#popup2" class="edit-gurukul btn btn-primary" onclick="editstudentform({{ $registration->id }})">Edit</a>
                         <form action="{{ route('teacher.destroy', $registration->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
@@ -68,7 +68,7 @@
             <h1 class="text-center" id="form-title">Teacher Registration Page</h1>
             <a class="close" href="#">&times;</a>
             <div class="content">
-                <form action="{{ route('teacher.registration.store') }}" method="POST">
+                <form action="{{ route('teacher.registration.store') }}" method="POST" class="form-control w-75 mx-auto mt-3">
                     @csrf
                     <div class="mb-3 center">
                         <!-- <label for="name">Name:</label> -->
@@ -131,7 +131,7 @@
                         <textarea id="modern_education_qualifications" name="modern_education_qualifications" placeholder="modern_education_qualifications" class="form-control"></textarea>
                     </div>
                     <!-- <div class="mb-3 center">  -->
-                        <button type="submit" class="btn btn-primary center">Submit</button>
+                        <button type="submit" class="btn btn-primary center form-control w-50 mx-auto d-block">Submit</button>
                     <!-- </div> -->
                 </form>
             </div>
@@ -144,7 +144,7 @@
         <h1 class="text-center" id="form-title">Teacher Registration Page</h1>
         <a class="close" href="#">&times;</a>
         <div class="content">
-            <form id="teacherform" action="{{ route('teacher.registration.store') }}" method="POST">
+            <form id="teacherform" action="{{ route('teacher.registration.store') }}" method="POST" class="form-control mt-3 w-75 mx-auto">
                 @csrf
                 <div class="mb-3 center">
                     <!-- <label for="name">Name:</label> -->
@@ -208,7 +208,7 @@
                     <textarea id="modern_education_qualifications" name="modern_education_qualifications" placeholder="modern_education_qualifications" class="form-control"></textarea>
                 </div>
                 <!-- <div class="mb-3 center">  -->
-                    <button type="submit" class="btn btn-primary center">Update</button>
+                    <button type="submit" class="btn btn-primary center form-control mx-auto d-block w-50">Update</button>
                 <!-- </div> -->
             </form>
         </div>

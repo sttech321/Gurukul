@@ -144,12 +144,27 @@ class AdminDashboardController extends Controller
         $teacher = TeacherRegistration::all();
         return view('layouts/teacher_registration',compact('teacher'));
     }
+    // Show the edit form
+    public function studentedit($id)
+    {
+        $registration = StudentRegistration::findOrFail($id);
+        return response()->json($registration);
+    }
+    
+    // Delete the student Registration
+    public function destroystudenttable($id)
+    {
+        $registration = StudentRegistration::findOrFail($id);
+        $registration->delete();
+
+        return redirect()->back()->with('success', 'Gurukul Registration deleted successfully.');
+    }
 
     public function student_registration()
     {
-        return view('layouts/student_registration');
+        $student = StudentRegistration::all();
+        return view('layouts/student_registration',compact('student'));
     }
-
 
     public function inventory_management()
     {

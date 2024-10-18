@@ -12,7 +12,7 @@
     }
   }
 
-  .center{
+  /* .center{
     margin-left: 200px;
   }
 
@@ -37,7 +37,7 @@
   width: 150px;
   height: 50px;
   margin-left: 1300px;
-}
+} */
 
 /* modal css start from here */
 
@@ -67,7 +67,7 @@ color:green;
   text-align: center;
 } */
 
-.button {
+/* .button {
   font-size: 1em;
   margin-left: 1300px;
   padding: 10px;
@@ -89,11 +89,11 @@ color:green;
   text-decoration: none;
   cursor: pointer;
   transition: all 0.3s ease-out;
-}
+} */
 
-.button:hover {
+/* .button:hover {
   background: #06D85F;
-}
+} */
 
 .overlay {
   position: fixed;
@@ -156,15 +156,15 @@ color:green;
 /* modal css end from here */
 
 /* edit button css */
-a.edit-gurukul {
+/* a.edit-gurukul {
   color: #fff;
   background-color: blue;
   padding: 7;
 }
 
 /* delete button css */
-button.btn.btn-danger {
+/* button.btn.btn-danger {
   color: #fff;
   background-color: red;
   padding: 7;
-}
+} */ 

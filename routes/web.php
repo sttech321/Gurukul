@@ -42,12 +42,18 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/inventory_management', [AdminDashboardController::class, 'inventory_management'])->name('inventory.registration');
-Route::get('/student_registration', [AdminDashboardController::class, 'student_registration'])->name('student.registration');
 Route::get('/gurukul_registration_page', [AdminDashboardController::class, 'gurukul_registration_page'])->name('gurukul.registration');
 Route::get('/gurukul/{id}/edit', [AdminDashboardController::class, 'edit'])->name('gurukul.edit');
 Route::post('/gurukul/{id}/update', [AdminDashboardController::class, 'update'])->name('gurukul.update');
 Route::delete('/gurukul/{id}', [AdminDashboardController::class, 'destroy'])->name('gurukul.destroy');
 Route::post('/gurukul/register', [AdminDashboardController::class, 'store'])->name('gurukul.register');
+
+Route::get('/student_registration', [AdminDashboardController::class, 'student_registration'])->name('student.registration');
+Route::post('/student-registration', [AdminDashboardController::class, 'stores'])->name('student.store');
+Route::delete('/student/{id}', [AdminDashboardController::class, 'destroystudenttable'])->name('student.destroy');
+Route::get('/student/{id}/edit', [AdminDashboardController::class, 'studentedit'])->name('student.edit');
+Route::post('/student/{id}/update', [AdminDashboardController::class, 'studentupdate'])->name('student.update');
+
 
 Route::post('/teacher-registration', [AdminDashboardController::class, 'storing_teacher_registration_data'])->name('teacher.registration.store');
 Route::get('/teacher_registration', [AdminDashboardController::class, 'teacher_registration'])->name('teacher.registration');
@@ -60,8 +66,6 @@ Route::post('/book-issues/store', [AdminDashboardController::class, 'storelibrar
 Route::post('/books', [AdminDashboardController::class, 'storebookdata'])->name('books.store');
 
 // Route::post('/library/store', [AdminDashboardController::class, 'create'])->name('library.store');
-
-Route::post('/student-registration', [AdminDashboardController::class, 'stores'])->name('student.store');
 
 Route::get('/child', function () {
     return view('layouts/child');

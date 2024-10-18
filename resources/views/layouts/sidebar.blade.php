@@ -1,10 +1,12 @@
         <title>App Name - @yield('title')</title>
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-        <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-        <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-        <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.0/themes/base/jquery-ui.css">
-        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-        <script src="https://code.jquery.com/ui/1.14.0/jquery-ui.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <!-- <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet"> -->
+        <!-- <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script> -->
+        <!-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.0/themes/base/jquery-ui.css"> -->
+        <!-- <script src="https://code.jquery.com/jquery-3.7.1.js"></script> -->
+        <!-- <script src="https://code.jquery.com/ui/1.14.0/jquery-ui.js"></script> -->
         @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/bootstrap.bundle.min.js'])
     <x-app-layout>
     <x-slot name="header">
@@ -17,10 +19,10 @@
     <aside class='h-screen bg-white gurukul registration page fixed lg:sticky top-0 border-r-2 p-6 pt-10 whitespace-nowrap z-10 closed shadow-xl '>
 
       <div class='mb-10 flex items-center justify-between '>
-        <div class=' p-2 bg-purple-600 text-white rounded'>
+        <!-- <div class=' p-2 bg-purple-600 text-white rounded'> -->
           <!-- <i data-feather='box'></i> -->
-               GURUKUL  
-        </div>
+               <!-- GURUKUL   -->
+        <!-- </div> -->
 
         <button class='lg:hidden bg-gray-200 text-gray-500 rounded leading-none p-1 btn-close-menu'>
           <i data-feather='chevron-left'></i>
@@ -69,20 +71,20 @@
         </li>
 
         <li>
-          <a href="{{ route('librarymanage.registration') }}" class='text-black flex items-center rounded px-3 py-2 hover:text-black hover:bg-gray-50 transition-all'>
+          <!-- <a href="{{ route('librarymanage.registration') }}" class='text-black flex items-center rounded px-3 py-2 hover:text-black hover:bg-gray-50 transition-all'>
             <i data-feather="user" style='width: 1.2em' class='mr-3'></i>
-            <span class='flex-grow text-black'>Library Management System</span>
+            <span class='flex-grow text-black'>Library Management System</span> -->
             <!-- <i data-feather="chevron-down" style='width: 1.2em'></i> -->
-          </a>
-        </li>
+          <!-- </a>
+        </li> -->
 
         <li>
-          <a href="{{ route('inventory.registration') }}" class='flex items-center rounded px-3 py-2 hover:text-black hover:bg-gray-50 transition-all'>
+          <!-- <a href="{{ route('inventory.registration') }}" class='flex items-center rounded px-3 py-2 hover:text-black hover:bg-gray-50 transition-all'>
             <i data-feather="users" style='width: 1.2em' class='mr-3'></i>
-            <span class='flex-grow text-black'>Inventory Management System</span>
+            <span class='flex-grow text-black'>Inventory Management System</span> -->
             <!-- <i data-feather="chevron-down" style='width: 1.2em'></i> -->
-          </a>
-        </li>
+          <!-- </a>
+        </li> -->
         
       </ul>
     </aside>
