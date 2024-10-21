@@ -13,6 +13,15 @@
         </div>
     @endif
 
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="table table-striped">
             <thead class="">
@@ -70,6 +79,14 @@
             <div class="content">
                 <form action="{{ route('teacher.registration.store') }}" method="POST" class="form-control w-75 mx-auto mt-3">
                     @csrf
+                    <div class="mb-3 center">
+                    <select id="gurukulid" name="gurukulid" class="form-select form-control">
+                        <option value="">Select Gurukul</option> <!-- Placeholder option -->
+                        @foreach($gurukuls as $gurukul)
+                            <option value="{{ $gurukul->id }}">{{ $gurukul->gurukul_name }}</option>
+                        @endforeach
+                    </select>
+                    </div>
                     <div class="mb-3 center">
                         <!-- <label for="name">Name:</label> -->
                         <input type="text" id="name" name="name" placeholder="name" required class="form-control">
@@ -146,6 +163,16 @@
         <div class="content">
             <form id="teacherform" action="{{ route('teacher.registration.store') }}" method="POST" class="form-control mt-3 w-75 mx-auto">
                 @csrf
+                <!-- Gurukul name -->
+                <div class="mb-3 center">
+                    <!-- <label for="type_of_setup" class="form-label">Type of Setup</label> -->
+                    <select id="gurukulid" name="gurukulid" class="form-select form-control">
+                        <option value="">Select Gurukul</option> <!-- Optional placeholder option -->
+                        @foreach($gurukuls as $gurukul)
+                            <option value="{{ $gurukul->id }}">{{ $gurukul->gurukul_name  }}</option> <!-- Replace 'id' with the actual field you want to use as value -->
+                        @endforeach
+                    </select>
+                </div>
                 <div class="mb-3 center">
                     <!-- <label for="name">Name:</label> -->
                      <input type="hidden" id="formid" value="">
@@ -223,9 +250,11 @@ function editstudentform(gurukulId) {
         .then(data => {
             // Get the form element
             const form = document.getElementById('teacherform');
-
+            
             // Populate the form fields with the fetched data
             form.querySelector('#formid').value = data.formid;
+            const setupTypeSelect = form.querySelector('#gurukulid');
+            setupTypeSelect.value = data.gurukulid;
             form.querySelector('#name').value = data.name;
             form.querySelector('#father_name').value = data.father_name;
             form.querySelector('#mother_name').value = data.mother_name;

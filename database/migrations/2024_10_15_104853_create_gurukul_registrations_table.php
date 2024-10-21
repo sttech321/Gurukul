@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();  // Primary key
             $table->string('gurukul_name');
             $table->string('address');
-            $table->string('pincode');
             $table->string('mobile_number');
     
             // Trust Information
@@ -37,20 +36,21 @@ return new class extends Migration
     
             // Focus Area
             $table->string('focus_area')->nullable();  // Can be multiple values separated by commas
+            $table->longText('facilities')->nullable();
     
             // Facilities Available
-            $table->boolean('school_building')->default(false);
-            $table->boolean('classrooms')->default(false);
-            $table->boolean('library')->default(false);
-            $table->boolean('computer_room')->default(false);
-            $table->boolean('kala_room')->default(false);
-            $table->boolean('vyam_kasha')->default(false);
-            $table->boolean('farms')->default(false);
-            $table->boolean('kitchen')->default(false);
-            $table->boolean('gaushala')->default(false);
-            $table->boolean('ashwashala')->default(false);
-            $table->boolean('workshop')->default(false);
-            $table->boolean('yagna_shala')->default(false);
+            // $table->boolean('school_building')->default(false);
+            // $table->boolean('classrooms')->default(false);
+            // $table->boolean('library')->default(false);
+            // $table->boolean('computer_room')->default(false);
+            // $table->boolean('kala_room')->default(false);
+            // $table->boolean('vyam_kasha')->default(false);
+            // $table->boolean('farms')->default(false);
+            // $table->boolean('kitchen')->default(false);
+            // $table->boolean('gaushala')->default(false);
+            // $table->boolean('ashwashala')->default(false);
+            // $table->boolean('workshop')->default(false);
+            // $table->boolean('yagna_shala')->default(false);
     
             // Education Board
             $table->boolean('registered_with_education_board')->default(false);

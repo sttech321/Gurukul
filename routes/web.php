@@ -4,25 +4,31 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TeacherDashboardController;
 use App\Http\Controllers\PrincipalDashboardController;
 use App\Http\Controllers\AdminDashboardController;
+use Illuminate\Support\Facades\Auth; 
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
+// Dashboard route based on user role
 Route::get('/dashboard', function () {
+    // Check if the user is authenticated
     if (Auth::check()) {
         // Get the authenticated user
         $user = Auth::user();
 
+        // Redirect based on the user's role
         if ($user->role === 'teacher') {
             return redirect()->route('teacher.dashboard');
         } elseif ($user->role === 'principal') {
             return redirect()->route('principal.dashboard');
-        }elseif ($user->role === 'admin') {
+        } elseif ($user->role === 'admin') {
             return redirect()->route('admin.dashboard');
         }
     }
+
+    // If not authenticated, redirect to the login page
     return redirect('/login');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -54,7 +60,6 @@ Route::delete('/student/{id}', [AdminDashboardController::class, 'destroystudent
 Route::get('/student/{id}/edit', [AdminDashboardController::class, 'studentedit'])->name('student.edit');
 Route::post('/student/{id}/update', [AdminDashboardController::class, 'studentupdate'])->name('student.update');
 
-
 Route::post('/teacher-registration', [AdminDashboardController::class, 'storing_teacher_registration_data'])->name('teacher.registration.store');
 Route::get('/teacher_registration', [AdminDashboardController::class, 'teacher_registration'])->name('teacher.registration');
 Route::delete('/teacher/{id}', [AdminDashboardController::class, 'destroyteachertable'])->name('teacher.destroy');
@@ -66,12 +71,18 @@ Route::post('/book-issues/store', [AdminDashboardController::class, 'storelibrar
 Route::post('/books', [AdminDashboardController::class, 'storebookdata'])->name('books.store');
 
 // Route::post('/library/store', [AdminDashboardController::class, 'create'])->name('library.store');
+Route::get('/add_new_class', [AdminDashboardController::class, 'showStdClass'])->name('add.class');
+// Route to create a new class
+Route::post('class/create', [AdminDashboardController::class, 'createnewclass'])->name('class.create');
+// Route to update an existing class
+Route::post('/class/update/{id}', [AdminDashboardController::class, 'updatenewclass'])->name('class.update');
+// Route to delete a class
+Route::delete('/class/delete/{id}', [AdminDashboardController::class, 'deletenewclass'])->name('class.delete');
+// Route to edit a class (fetch data for editing)
+Route::get('/class/edit/{id}', [AdminDashboardController::class, 'editnewclass'])->name('class.edit');
 
 Route::get('/child', function () {
     return view('layouts/child');
 });
 
-
 require __DIR__.'/auth.php';
-
-

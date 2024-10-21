@@ -13,6 +13,7 @@ class TeacherRegistration extends Model
 
     // Define the fillable fields
     protected $fillable = [
+        'gurukulid',
         'name',
         'father_name',
         'mother_name',

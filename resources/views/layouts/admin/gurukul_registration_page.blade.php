@@ -13,6 +13,17 @@
         </div>
     @endif
 
+    
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="table table-striped mt-3">
             <thead class="">
