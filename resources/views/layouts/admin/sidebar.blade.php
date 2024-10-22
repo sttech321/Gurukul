@@ -32,23 +32,20 @@
       <ul class='text-gray-500 font-semibold flex flex-col gap-2'>
         <li>
           <a href="#" class='flex items-center rounded px-3 py-2 hover:text-black hover:bg-gray-50  transition-all'>
-            <i data-feather="home" style='width: 1.2em' class='mr-3'></i>
             <span class='flex-grow text-black'>Home</span>
           </a>
         </li>
 
         <li>
           <a href="{{ route('admin.dashboard') }}" class='active text-black bg-gray-100 flex items-center rounded px-3 py-2 hover:text-black hover:bg-gray-50 transition-all'>
-            <i data-feather="columns" style='width: 1.2em' class='mr-3'></i>
             <span class='flex-grow'>My Dashboard</span>
           </a>
         </li>
 
         <li>
         <a href="{{ route('gurukul.registration') }}" class='flex rounded px-3 py-2 hover:text-black hover:bg-gray-50 transition-all'>
-            <span class='flex items-center gap-3 text-black'>
-                <i data-feather="bell" style='width: 1.2em'></i>
-                Gurukul Registration Page
+            <span class='flex items-center text-black'>
+                Gurukul Registration
             </span>
         </a>
         </li>
@@ -56,8 +53,7 @@
 
         <li>
           <a href="{{ route('teacher.registration') }}" class='flex rounded px-3 py-2 hover:text-black hover:bg-gray-50 transition-all'>
-            <span class='flex items-center gap-3 text-black'>
-              <i data-feather="rss" style='width: 1.2em'></i>
+            <span class='flex items-center text-black'>
               Teacher Registration 
             </span>
           </a>
@@ -65,12 +61,21 @@
 
         <li>
           <a href="{{ route('student.registration') }}" class='flex items-center rounded px-3 py-2 hover:text-black hover:bg-gray-50 transition-all'>
-            <i data-feather="calendar" style='width: 1.2em' class='mr-3'></i>
-            <span class='flex-grow text-black'>Student Registration and Deatils</span>
+            <span class='flex-grow text-black'>
+              Student Registration
+            </span>
           </a>
         </li>
 
         <li>
+
+        <a href="{{ route('add.class') }}" class='text-black flex items-center rounded px-3 py-2 hover:text-black hover:bg-gray-50 transition-all'>
+          <span class='flex-grow text-black'>
+              Add New Class
+            </span>
+        </a>
+      </li>
+
           <!-- <a href="{{ route('librarymanage.registration') }}" class='text-black flex items-center rounded px-3 py-2 hover:text-black hover:bg-gray-50 transition-all'>
             <i data-feather="user" style='width: 1.2em' class='mr-3'></i>
             <span class='flex-grow text-black'>Library Management System</span> -->
@@ -78,7 +83,7 @@
           <!-- </a>
         </li> -->
 
-        <li>
+        <!-- <li> -->
           <!-- <a href="{{ route('inventory.registration') }}" class='flex items-center rounded px-3 py-2 hover:text-black hover:bg-gray-50 transition-all'>
             <i data-feather="users" style='width: 1.2em' class='mr-3'></i>
             <span class='flex-grow text-black'>Inventory Management System</span> -->
@@ -107,7 +112,7 @@
   </div>
   </x-app-layout>
 <script>
-feather.replace();
+// feather.replace();
 
 const btnOpenMenu = document.querySelector(".btn-open-menu");
 const btnCloseMenu = document.querySelector(".btn-close-menu");

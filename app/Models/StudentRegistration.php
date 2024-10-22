@@ -10,6 +10,8 @@ class StudentRegistration extends Model
     use HasFactory;
     
     protected $fillable = [
+        'gurukulid',
+        'std_class',
         'name',
         'father_name',
         'mother_name',
