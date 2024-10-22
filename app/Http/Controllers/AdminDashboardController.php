@@ -107,15 +107,12 @@ class AdminDashboardController extends Controller
             'secretary_name' => $request->secretary_name,
             'treasurer_name' => $request->treasurer_name,
             'principal_name' => $request->principal_name,
-            'education_board_support' => $request->education_board_support,
-            'government_support' => $request->government_support,
-            'private_donations' => $request->private_donations,
-            'donations_from_temples_and_mathas' => $request->donations_from_temples_and_mathas,
+            'fund_resource' => $request->fund_resource,
             'setup_type' => $request->setup_type,
-            'focus_area' => implode(',', $request->focus_area),
-            'facilities' => implode(',', $request->facilities),
-            'registered_with_education_board' => $registeredWithEducationBoard, // Use the converted value
-            'education_board_name' => $request->education_board_name,
+            'focus_area' => implode(', ', $request->focus_area), // Convert array to string
+            'registered_with_education_board' => $request->registered_with_education_board,
+            'education_board_name' => $request->registered_with_education_board === 'Yes' ? $request->education_board_name : null, // Store if registered
+            'facilities' => implode(', ', $request->facilities),
         ]);
     
         return redirect()->back()->with('success', 'Gurukul Registration updated successfully.');

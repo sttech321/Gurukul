@@ -21,6 +21,8 @@
         
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
             @include('layouts.navigation')
+           
+           
             <div class="flex-grow">
             <!-- Page Heading -->
             @isset($header)

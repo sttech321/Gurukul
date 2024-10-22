@@ -37,7 +37,7 @@
         </li>
 
         <li>
-          <a href="{{ route('student.registration') }}" class='flex items-center rounded px-3 py-2 hover:text-black hover:bg-gray-50 transition-all'>
+          <a href="{{ route('student.registrations') }}" class='flex items-center rounded px-3 py-2 hover:text-black hover:bg-gray-50 transition-all'>
             <span class='flex-grow text-black'>
               Student Registration
             </span>

@@ -48,7 +48,7 @@
             <tbody>
             @foreach($gurukuls as $registration)
                 <tr class="">
-                    <td class="">
+                    <td class="px-6 py-4">
                     {{ $registration->gurukul_name }}
                     </td>
                     <td class="px-6 py-4">
@@ -110,7 +110,7 @@
                     </div>
 
                     <!-- role -->
-                    <input type="hidden" class="form-control" id="role" name="role" placeholder="role " class="form-control" required>
+                        <input type="hidden" class="form-control" id="role" name="role" placeholder="role " class="form-control" required>
 
                     <h3 class="center">Trust Information</h3>
 
@@ -253,7 +253,7 @@
 
                 <!-- Address -->
                 <div class="mb-3 center">
-                    <textarea id="address" name="address" class="form-control" placeholder="Address (including Pincode)" rows="3" value="" required></textarea>
+                    <textarea id="address" name="address" class="form-control" placeholder="Address (including)" rows="3" value="" required></textarea>
                 </div>
 
                 <!-- Mobile Number -->
@@ -261,19 +261,6 @@
                     <input type="text" id="mobile_number" name="mobile_number" placeholder="Mobile Number" class="form-control" value="" required>
                 </div>
 
-                <!-- email -->
-                <div class="mb-3 center">
-                    <input type="email" class="form-control" id="email" name="email" placeholder="email" class="form-control" required>
-                </div>
-
-                <!-- password -->
-                <div class="mb-3 center">
-                    <input type="password" class="form-control" id="password" name="password" placeholder="password " class="form-control" required>
-                </div>
-
-                <!-- role -->
-                <input type="hidden" class="form-control" id="role" name="role" placeholder="role " class="form-control" required>
-                
                 <h3 class="center">Trust Information</h3>
 
                 <!-- Trust Name -->
@@ -313,29 +300,13 @@
                 </div>
 
                 <h3 class="center">Fund Resources</h3>
-
-                <!-- Education Board Support -->
                 <div class="mb-3 center">
-                    <!-- <label for="education_board_support" class="form-label">Education Board Support</label> -->
-                    <input type="text" id="education_board_support" name="education_board_support" placeholder="Education Board Support" class="form-control">
-                </div>
-
-                <!-- Government Support -->
-                <div class="mb-3 center">
-                    <!-- <label for="government_support" class="form-label">Government Support</label> -->
-                    <input type="text" id="government_support" name="government_support" placeholder="Government Support" class="form-control">
-                </div>
-
-                <!-- Private Donations -->
-                <div class="mb-3 center">
-                    <!-- <label for="private_donations" class="form-label">Private Donations</label> -->
-                    <input type="text" id="private_donations" name="private_donations" placeholder="Private Donations" class="form-control">
-                </div>
-
-                <!-- Donations from Temples and Mathas -->
-                <div class="mb-3 center">
-                    <!-- <label for="temples_donations" class="form-label">Donations from Temples and Mathas</label> -->
-                    <input type="text" id="temples_donations" name="donations_from_temples_and_mathas" placeholder="Donations from Temples and Mathas" class="form-control">
+                    <select id="fund_resource" class="form-control" name="fund_resource" class="form-select form-control">
+                        <option value="education_board_support">education_board_support</option>
+                        <option value="government_support">government_support</option>
+                        <option value="private_donations">private_donations</option>
+                        <option value="donations_from_temples_and_mathas">donations_from_temples_and_mathas</option>
+                    </select>
                 </div>
 
                 <h3 class="center">Type of Setup</h3>
@@ -372,19 +343,29 @@
                 <h3 class="center">Facilities Available</h3>
 
                 <!-- Facilities Available (checkboxes) -->
-                <div class="mb-3 center">
-                    <!-- <label class="form-label">Facilities Available</label><br> -->
-
-                    @php
-                    $facilities = ['School Building', 'Classrooms', 'Library', 'Computer Room', 'Kala Room', 'Vyam Kasha', 'Farms', 'Kitchen', 'Gaushala', 'Ashwashala', 'Workshop', 'Yagna Shala'];
-                    @endphp
-
-                    @foreach($facilities as $facility)
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="{{ strtolower(str_replace(' ', '_', $facility)) }}" name="facilities[]" value="{{ $facility }}">
-                            <label class="form-check-label" for="{{ strtolower(str_replace(' ', '_', $facility)) }}">{{ $facility }}</label>
-                        </div>
-                    @endforeach
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="School_Building" name="facilities[]" value="School Building">
+                    <label class="form-check-label" for="School_Building">School Building</label><br>
+                    <input class="form-check-input" type="checkbox" id="Classrooms" name="facilities[]" value="Classrooms">
+                    <label class="form-check-label" for="Classrooms">Classrooms</label><br>
+                    <input class="form-check-input" type="checkbox" id="Library" name="facilities[]" value="Library">
+                    <label class="form-check-label" for="Library">Library</label><br>
+                    <input class="form-check-input" type="checkbox" id="ComputerRoom" name="facilities[]" value="Computer Room">
+                    <label class="form-check-label" for="ComputerRoom">Computer Room</label><br>
+                    <input class="form-check-input" type="checkbox" id="Kala_Room" name="facilities[]" value="Kala Room">
+                    <label class="form-check-label" for="Kala_Room">Kala Room</label><br>
+                    <input class="form-check-input" type="checkbox" id="Vyam_Kasha" name="facilities[]" value="Vyam Kasha">
+                    <label class="form-check-label" for="Vyam_Kasha">Vyam Kasha</label><br>
+                    <input class="form-check-input" type="checkbox" id="Farms" name="facilities[]" value="Farms">
+                    <label class="form-check-label" for="Farms">Farms</label><br>
+                    <input class="form-check-input" type="checkbox" id="Kitchen" name="facilities[]" value="Kitchen">
+                    <label class="form-check-label" for="Kitchen">Kitchen</label><br>
+                    <input class="form-check-input" type="checkbox" id="Ashwashala" name="facilities[]" value="Ashwashala">
+                    <label class="form-check-label" for="Ashwashala">Ashwashala</label><br>
+                    <input class="form-check-input" type="checkbox" id="Workshop" name="facilities[]" value="Workshop">
+                    <label class="form-check-label" for="Workshop">Workshop</label><br>
+                    <input class="form-check-input" type="checkbox" id="Yagna_Shala" name="facilities[]" value="Yagna Shala">
+                    <label class="form-check-label" for="Yagna_Shala">Yagna Shala</label><br>
                 </div>
 
                 <h3 class="center">Registered with Education Board</h3>
@@ -431,10 +412,25 @@ function editstudentform(gurukulId) {
             form.querySelector('#secretary_name').value = data.secretary_name;
             form.querySelector('#treasurer_name').value = data.treasurer_name;
             form.querySelector('#principal_name').value = data.principal_name;
-            form.querySelector('#education_board_support').value = data.education_board_support;
-            form.querySelector('#government_support').value = data.government_support;
-            form.querySelector('#private_donations').value = data.private_donations;
-            form.querySelector('#temples_donations').value = data.donations_from_temples_and_mathas;
+
+            // Assuming data.Facilities is an array of selected facilities
+            const facilitiesArray = data.facilities.split(', ').map(facility => facility.trim());
+            console.log(facilitiesArray,'facilitiesArray');
+            // Loop through the checkboxes and set their checked property
+            document.querySelectorAll('.form-check-input').forEach(function(checkbox) {
+                // Check if the checkbox value is in the facilitiesArray
+                if (facilitiesArray.includes(checkbox.value)) {
+                    checkbox.checked = true; // Set checkbox as checked
+                    console.log(checkbox,'facilitiesArray1111');
+                } else {
+                    checkbox.checked = false; // Optional: explicitly uncheck others
+                }
+            });
+
+            // Populate the fund resource select field
+            const fundResourceSelect = form.querySelector('#fund_resource');
+            fundResourceSelect.value = data.fund_resource; // Assuming `fund_resource` is returned in the fetched data
+
             // Populate the setup type select field
             const setupTypeSelect = form.querySelector('#type_of_setups');
             setupTypeSelect.value = data.setup_type; // Assuming `setup_type` is returned in the fetched data
@@ -445,13 +441,6 @@ function editstudentform(gurukulId) {
             for (let option of focusAreasSelect.options) {
                 option.selected = selectedFocusAreas.includes(option.value);
             }
-
-            // Populate the facilities checkboxes
-            const facilities = ['School Building', 'Classrooms', 'Library', 'Computer Room', 'Kala Room', 'Vyam Kasha', 'Farms', 'Kitchen', 'Gaushala', 'Ashwashala', 'Workshop', 'Yagna Shala'];
-            facilities.forEach(facility => {
-                const checkbox = form.querySelector(`#${facility.toLowerCase().replace(/ /g, '_')}`);
-                checkbox.checked = data.facilities ? data.facilities.includes(facility) : false; // Check if facility is in the data
-            });
 
             // Populate the registered with education board radio buttons
             if (data.registered_with_education_board === 'Yes') {

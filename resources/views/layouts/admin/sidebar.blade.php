@@ -112,7 +112,7 @@
   </div>
   </x-app-layout>
 <script>
-feather.replace();
+// feather.replace();
 
 const btnOpenMenu = document.querySelector(".btn-open-menu");
 const btnCloseMenu = document.querySelector(".btn-close-menu");

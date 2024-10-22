@@ -39,14 +39,11 @@ Route::get('/dashboard/teacher', [TeacherDashboardController::class, 'index'])->
 
 Route::get('/dashboard/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard')->middleware('role:admin');
 
-
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
 
 Route::get('/inventory_management', [AdminDashboardController::class, 'inventory_management'])->name('inventory.registration');
 Route::get('/gurukul_registration_page', [AdminDashboardController::class, 'gurukul_registration_page'])->name('gurukul.registration')->middleware('role:admin');
