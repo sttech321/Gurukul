@@ -249,10 +249,10 @@ class AdminDashboardController extends Controller
     // view page of the student registration
     public function student_registration()
     {   
-        $Add_student_class = Add_student_class::all();
+       
         $gurukuls = GurukulRegistration::all();
         $student = StudentRegistration::all();
-        return view('layouts/admin/student_registration',compact('student','gurukuls','Add_student_class'));
+        return view('layouts/admin/student_registration',compact('student','gurukuls'));
     }
 
     // edit the student form data

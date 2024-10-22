@@ -3,10 +3,10 @@
 @section('content')
 <div class="container mx-auto p-6">
     <div class="box">
-        <a class="btn btn-primary" href="#popup1" onclick="openPopup('add')">Add new Student</a>
+        <a class="btn btn-primary" href="#popup1" onclick="openPopup('add')">{{ __('messages.add_new_student') }}</a>
     </div>
        <!-- Teacher List Table -->
-   <h1 class="text-center">Student Registration Page</h1><br>
+   <h1 class="text-center">{{ __('messages.student_registration_page') }}</h1><br>
     @if(session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
@@ -27,21 +27,21 @@
         <table class="table table-striped">
             <thead class="">
                 <tr>
-                    <th scope="col" class="px-6 py-3">
-                        Student Name
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        DOB
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Aadhaar Card
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Address
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Action
-                    </th>
+                <th scope="col" class="px-6 py-3">
+                    {{ __('messages.student_name') }}
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    {{ __('messages.dob') }}
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    {{ __('messages.aadhaar_card') }}
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    {{ __('messages.address') }}
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    {{ __('messages.action') }}
+                </th>
                 </tr>
             </thead>
             <tbody>
@@ -84,7 +84,7 @@
                     <div class="mb-3 center">
                     <span class="text-danger" id="gurukulid-error"></span>
                         <select id="gurukulid" name="gurukulid" class="form-select form-control">
-                            <option value="">Select Gurukul</option> 
+                            <option value="">{{ __('messages.select_gurukul') }}</option> 
                             @foreach($gurukuls as $gurukul)
                                 <option value="{{ $gurukul->id }}">{{ $gurukul->gurukul_name  }}</option>
                             @endforeach
@@ -94,10 +94,10 @@
                     <div class="mb-3 center">
                         <span class="text-danger" id="gurukulclass-error"></span>
                         <select id="gurukulclass" name="std_class" class="form-select form-control">
-                            <option value="">Select class</option> <!-- Optional placeholder option -->
-                            @foreach($Add_student_class as $class)
-                                <option value="{{ $class->id }}">{{ $class->std_classes  }}</option> 
-                            @endforeach
+                            <option value="">{{ __('messages.select_class') }}</option> <!-- Optional placeholder option -->
+                            
+                                <option value=""></option> 
+                          
                         </select>
                     </div>
                     
@@ -105,87 +105,87 @@
                     <div class="mb-3 center">
                         <!-- <label>Name:</label> -->
                         <span class="text-danger" id="name-error"></span>
-                        <input type="text" id="name" name="name" placeholder="name" class="form-control" required><br>
+                        <input type="text" id="name" name="name" placeholder="{{ __('messages.name') }}" class="form-control" required><br>
                     </div>
                     <div class="mb-3 center">
                         <!-- <label>Father's Name:</label> -->
                         <!-- <span class="text-danger" id="father_name-error"></span> -->
-                        <input type="text" id="father_name"name="father_name" placeholder="father_name" class="form-control" required><br>
+                        <input type="text" id="father_name"name="father_name" placeholder="{{ __('messages.father_name') }}" class="form-control" required><br>
                     </div>
                     <div class="mb-3 center">
                         <!-- <label>Mother's Name:</label> -->
                         <!-- <span class="text-danger" id="mother_name-error"></span> -->
-                        <input type="text" id="mother_name" name="mother_name" placeholder="mother_name" class="form-control" required><br>
+                        <input type="text" id="mother_name" name="mother_name" placeholder="{{ __('messages.mother_name') }}" class="form-control" required><br>
                     </div>
                     <div class="mb-3 center">
                         <!-- <label>Date of Birth:</label> -->
                         <!-- <span class="text-danger" id="date_of_birth-error"></span> -->
-                        <input type="date" id="date_of_birth" name="date_of_birth" placeholder="date_of_birth" class="form-control" required><br>
+                        <input type="date" id="date_of_birth" name="date_of_birth" placeholder="{{ __('messages.date_of_birth') }}" class="form-control" required><br>
                     </div>
                     <div class="mb-3 center">
                         <!-- <label>Aadhaar Card:</label> -->
                         <!-- <span class="text-danger" id="aadhaar_card-error"></span> -->
-                        <input type="text" id="aadhaar_card" name="aadhaar_card" placeholder="aadhaar_card" class="form-control" maxlength="12" required><br>
+                        <input type="text" id="aadhaar_card" name="aadhaar_card" placeholder="{{ __('messages.aadhaar_card') }}" class="form-control" maxlength="12" required><br>
                     </div>
                     <div class="mb-3 center">
                         <!-- <label>Home Address:</label> -->
                         <!-- <span class="text-danger" id="home_address-error"></span> -->
-                        <input type="text" id="home_address" name="home_address" placeholder="home_address" class="form-control" required><br>
+                        <input type="text" id="home_address" name="home_address" placeholder="{{ __('messages.home_address') }}" class="form-control" required><br>
                     </div>
                     <div class="mb-3 center">
                     <h4>Father's Details</h4>
                         <!-- <label>Father's Date of Birth:</label> -->
                         <!-- <span class="text-danger" id="father_dob-error"></span> -->
-                        <input type="date" id="father_dob" name="father_dob" placeholder="father_dob" class="form-control" required><br>
+                        <input type="date" id="father_dob" name="father_dob" placeholder="{{ __('messages.father_dob') }}" class="form-control" required><br>
                     </div>
                     <div class="mb-3 center">
                         <!-- <label>Father's Aadhaar Card:</label> -->
                         <!-- <span class="text-danger" id="father_aadhaar_card-error"></span> -->
-                        <input type="text" id="father_aadhaar_card" name="father_aadhaar_card" placeholder="father_aadhaar_card" class="form-control" maxlength="12" required><br>
+                        <input type="text" id="father_aadhaar_card" name="father_aadhaar_card" placeholder="{{ __('messages.father_aadhaar_card') }}" class="form-control" maxlength="12" required><br>
                     </div>
                     <div class="mb-3 center">
                         <!-- <label>Father's Address:</label> -->
                         <!-- <span class="text-danger" id="father_address-error"></span> -->
-                        <input type="text" id="father_address" name="father_address" placeholder="father_address" class="form-control" required><br>
+                        <input type="text" id="father_address" name="{{ __('messages.father_address') }}" placeholder="father_address" class="form-control" required><br>
                     </div>
                     <div class="mb-3 center">
                         <!-- <label>Father's Mobile Number:</label> -->
                         <!-- <span class="text-danger" id="father_mobile_number-error"></span> -->
-                        <input type="text" id="father_mobile_number" name="father_mobile_number" placeholder="father_mobile_number" class="form-control" maxlength="10" required><br>
+                        <input type="text" id="father_mobile_number" name="father_mobile_number" placeholder="{{ __('messages.father_mobile_number') }}" class="form-control" maxlength="10" required><br>
                     </div>
                     <div class="mb-3 center">
                         <!-- <label>Father's Profession:</label> -->
                         <!-- <span class="text-danger" id="father_profession-error"></span> -->
-                        <input type="text" id="father_profession" name="father_profession" placeholder="father_profession" class="form-control" required><br>
+                        <input type="text" id="father_profession" name="father_profession" placeholder="{{ __('messages.father_profession') }}" class="form-control" required><br>
                     </div>
                     <div class="mb-3 center">
                     <h4 class="">Mother's Details</h4>
                         <!-- <label>Mother's Date of Birth:</label> -->
                         <!-- <span class="text-danger" id="mother_dob-error"></span> -->
-                        <input type="date" id="mother_dob" name="mother_dob" placeholder="mother_dob" class="form-control" required><br>
+                        <input type="date" id="mother_dob" name="mother_dob" placeholder="{{ __('messages.mother_dob') }}" class="form-control" required><br>
                     </div>
                     <div class="mb-3 center">
                         <!-- <label>Mother's Aadhaar Card:</label> -->
                         <!-- <span class="text-danger" id="father_profession-error"></span> -->
-                        <input type="text" name="mother_aadhaar_card" placeholder="mother_aadhaar_card" class="form-control" maxlength="12" required><br>
+                        <input type="text" name="mother_aadhaar_card" placeholder="{{ __('messages.mother_aadhaar_card') }}" class="form-control" maxlength="12" required><br>
                     </div>
                     <div class="mb-3 center">
                         <!-- <label>Mother's Address:</label> -->
                         <!-- <span class="text-danger" id="mother_address-error"></span> -->
-                        <input type="text" id="mother_address" name="mother_address" placeholder="mother_address" class="form-control" required><br>
+                        <input type="text" id="mother_address" name="mother_address" placeholder="{{ __('messages.mother_address') }}" class="form-control" required><br>
                     </div>
                     <div class="mb-3 center">
                         <!-- <label>Mother's Mobile Number:</label> -->
                         <!-- <span class="text-danger" id="mother_mobile_number-error"></span> -->
-                        <input type="text" id="mother_mobile_number" name="mother_mobile_number" placeholder="mother_mobile_number" class="form-control" maxlength="10" required><br>
+                        <input type="text" id="mother_mobile_number" name="mother_mobile_number" placeholder="{{ __('messages.mother_mobile_number') }}" class="form-control" maxlength="10" required><br>
                     </div>
                     <div class="mb-3 center">
                         <!-- <label>Mother's Profession:</label> -->
                         <!-- <span class="text-danger" id="mother_profession-error"></span>  -->
-                        <input type="text" id="mother_profession" name="mother_profession" placeholder="mother_profession" class="form-control" required><br>
+                        <input type="text" id="mother_profession" name="mother_profession" placeholder="{{ __('messages.mother_profession') }}" class="form-control" required><br>
                     </div>
                    
-                    <button type="submit" class="btn btn-primary center mx-auto d-block w-50 form-control">Submit</button>
+                    <button type="submit" class="btn btn-primary center mx-auto d-block w-50 form-control">{{ __('messages.submit') }}</button>
                 </form>
             </div>
         </div>
@@ -193,7 +193,7 @@
 </div>
 <div id="popup2" class="overlay">
     <div class="popup">
-        <h3 class="text-center">Student Registration Form</h3>
+        <h3 class="text-center">{{ __('messages.student_update_form') }}</h3>
         <a class="close" href="#">&times;</a>
         <div class="content">
             <form id="studentforms" action="{{ route('student.store') }}" method="POST" class="form-control mx-auto mt-3 w-75">
@@ -201,7 +201,7 @@
                 <!-- select gurukul -->
                 <div class="mb-3 center">
                     <select id="gurukulid" name="gurukulid" class="form-select form-control">
-                        <option value="">Select Gurukul</option>
+                        <option value="">{{ __('messages.select_gurukul') }}</option>
                         @foreach($gurukuls as $gurukul)
                             <option value="{{ $gurukul->id }}">{{ $gurukul->gurukul_name  }}</option> 
                         @endforeach
@@ -211,81 +211,79 @@
                     <!-- select class -->
                     <div class="mb-3 center">
                         <select id="gurukulclass" name="std_class" class="form-select form-control">
-                            <option value="">Select class</option> <!-- Optional placeholder option -->
-                            @foreach($Add_student_class as $class)
-                                <option value="{{ $class->id }}">{{ $class->std_classes  }}</option> 
-                            @endforeach
+                            <option value="">{{ __('messages.select_class') }}</option> <!-- Optional placeholder option -->
+              
                         </select>
                     </div>
                 <!-- Student Details -->
                 <div class="mb-3 center">
                     <!-- <label>Name:</label> -->
                     <input type="hidden" name="formid" id="formid">
-                    <input type="text" id="name" name="name" placeholder="name" class="form-control" required><br>
+                    <input type="text" id="name" name="name" placeholder="{{ __('messages.name') }}" class="form-control" required><br>
                 </div>
                 <div class="mb-3 center">
                     <!-- <label>Father's Name:</label> -->
-                    <input type="text" id="father_name" name="father_name" placeholder="father_name" class="form-control" required><br>
+                    <input type="text" id="father_name" name="father_name" placeholder="{{ __('messages.father_name') }}" class="form-control" required><br>
                 </div>
                 <div class="mb-3 center">
                     <!-- <label>Mother's Name:</label> -->
-                    <input type="text" id="mother_name" name="mother_name" placeholder="mother_name" class="form-control" required><br>
+                    <input type="text" id="mother_name" name="mother_name" placeholder="{{ __('messages.mother_name') }}" class="form-control" required><br>
                 </div>
                 <div class="mb-3 center">
                     <!-- <label>Date of Birth:</label> -->
-                    <input type="date" id="date_of_birth" name="date_of_birth" placeholder="date_of_birth" class="form-control" required><br>
+                    <input type="date" id="date_of_birth" name="date_of_birth" placeholder="{{ __('messages.date_of_birth') }}" class="form-control" required><br>
                 </div>
                 <div class="mb-3 center">
                     <!-- <label>Aadhaar Card:</label> -->
-                    <input type="text" id="aadhaar_card" name="aadhaar_card" placeholder="aadhaar_card" class="form-control" maxlength="12" required><br>
+                    <input type="text" id="aadhaar_card" name="aadhaar_card" placeholder="{{ __('messages.aadhaar_card') }}" class="form-control" maxlength="12" required><br>
                 </div>
                 <div class="mb-3 center">
                     <!-- <label>Home Address:</label> -->
-                    <input type="text" id="home_address" name="home_address" placeholder="home_address" class="form-control" required><br>
+                    <input type="text" id="home_address" name="home_address" placeholder="{{ __('messages.home_address') }}" class="form-control" required><br>
                 </div>
                 <div class="mb-3 center">
                 <h4>Father's Details</h4>
                     <!-- <label>Father's Date of Birth:</label> -->
-                    <input type="date" id="father_dob" name="father_dob" placeholder="father_dob" class="form-control" required><br>
+                    <input type="date" id="father_dob" name="father_dob" placeholder="{{ __('messages.father_dob') }}" class="form-control" required><br>
                 </div>
                 <div class="mb-3 center">
                     <!-- <label>Father's Aadhaar Card:</label> -->
-                    <input type="text" id="father_aadhaar_card" name="father_aadhaar_card" placeholder="father_aadhaar_card" class="form-control" maxlength="12" required><br>
+                    <input type="text" id="father_aadhaar_card" name="father_aadhaar_card" placeholder="{{ __('messages.father_aadhaar_card') }}" class="form-control" maxlength="12" required><br>
                 </div>
                 <div class="mb-3 center">
                     <!-- <label>Father's Address:</label> -->
-                    <input type="text" id="father_address" name="father_address" placeholder="father_address" class="form-control" required><br>
+                    <input type="text" id="father_address" name="father_address" placeholder="{{ __('messages.father_address') }}" class="form-control" required><br>
                 </div>
                 <div class="mb-3 center">
                     <!-- <label>Father's Mobile Number:</label> -->
-                    <input type="text" id="father_mobile_number" name="father_mobile_number" placeholder="father_mobile_number" class="form-control" maxlength="10" required><br>
+                    <input type="text" id="father_mobile_number" name="father_mobile_number" placeholder="{{ __('messages.father_mobile_number') }}" class="form-control" maxlength="10" required><br>
                 </div>
                 <div class="mb-3 center">
                     <!-- <label>Father's Profession:</label> -->
-                    <input type="text" id="father_profession" name="father_profession" placeholder="father_profession" class="form-control" required><br>
+                    <input type="text" id="father_profession" name="father_profession" placeholder="{{ __('messages.father_profession') }}" class="form-control" required><br>
                 </div>
                 <div class="mb-3 center">
                 <h4 class="">Mother's Details</h4>
                     <!-- <label>Mother's Date of Birth:</label> -->
-                    <input type="date" id="mother_dob" name="mother_dob" placeholder="mother_dob" class="form-control" required><br>
+                    <input type="date" id="mother_dob" name="mother_dob" placeholder="{{ __('messages.mother_dob') }}" class="form-control" required><br>
                 </div>
                 <div class="mb-3 center">
                     <!-- <label>Mother's Aadhaar Card:</label> -->
-                    <input type="text" id="mother_aadhaar_card" name="mother_aadhaar_card" placeholder="mother_aadhaar_card" class="form-control" maxlength="12" required><br>
+                    <input type="text" id="mother_aadhaar_card" name="mother_aadhaar_card" placeholder="{{ __('messages.mother_aadhaar_card') }}" class="form-control" maxlength="12" required><br>
                 </div>
                 <div class="mb-3 center">
                     <!-- <label>Mother's Address:</label> -->
-                    <input type="text" id="mother_address" name="mother_address" placeholder="mother_address" class="form-control" required><br>
+                    <input type="text" id="mother_address" name="mother_address" placeholder="{{ __('messages.mother_address') }}" class="form-control" required><br>
                 </div>
                 <div class="mb-3 center">
                     <!-- <label>Mother's Mobile Number:</label> -->
-                    <input type="text" id="mother_mobile_number" name="mother_mobile_number" placeholder="mother_mobile_number" class="form-control" maxlength="10" required><br>
+                    <input type="text" id="mother_mobile_number" name="mother_mobile_number" placeholder="{{ __('messages.mother_mobile_number') }}" class="form-control" maxlength="10" required><br>
                 </div>
                 <div class="mb-3 center">
                     <!-- <label>Mother's Profession:</label> -->
-                    <input type="text" id="mother_profession" name="mother_profession" placeholder="mother_profession" class="form-control" required><br>
+                    <input type="text" id="mother_profession" name="mother_profession" placeholder="{{ __('messages.mother_profession') }}" class="form-control" required><br>
                 </div>
-                <button type="submit" class="btn btn-primary center form-control mx-auto d-block w-50">update</button>
+                <button type="submit" class="btn btn-primary center form-control mx-auto d-block w-50">{{ __('messages.update') }}</button>
             </form>
         </div>
     </div>
