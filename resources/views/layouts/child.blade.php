@@ -1,6 +1,6 @@
 <!-- resources/views/child.blade.php -->
  
-@extends('layouts.sidebar')
+@extends('layouts.admin.sidebar')
  
 @section('title', 'Page Title')
 <x-slot name="header">

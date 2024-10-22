@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\StudentRegistration;
 use App\Models\Add_student_class;
 use App\Models\Book;
+use App\Models\User;
 use App\Models\BookIssue;
 use App\Models\GurukulRegistration;
 use App\Models\TeacherRegistration;
@@ -22,46 +23,51 @@ class AdminDashboardController extends Controller
     // Store gurukul registration page form data
     public function store(Request $request)
     {
+        // Validate incoming request
         $request->validate([
             'gurukul_name' => 'required|string|max:255',
-            // 'address' => 'required|string',
-            // 'pincode' => 'required|string|max:6',
-            // 'mobile_number' => 'required|string|max:15',
-            // 'trust_name' => 'required|string',
-            // 'trust_registration_date' => 'required|date',
-            // 'trust_president_name' => 'required|string',
-            // 'secretary_name' => 'required|string',
-            // 'treasurer_name' => 'required|string',
-            // 'principal_name' => 'required|string',
-            // 'setup_type' => 'required|string',
-            // 'focus_area' => 'nullable|string',
-            // 'education_board_name' => 'nullable|string',
+            'address' => 'required|string',
+            'mobile_number' => 'required|string|max:15',
+            'email' => 'required|email|max:255',
+            'password' => 'required|string|min:8',
         ]);
-
-
+    
+        // Create Gurukul registration record
         GurukulRegistration::create([
             'gurukul_name' => $request->gurukul_name,
             'address' => $request->address,
             'mobile_number' => $request->mobile_number,
+            'email' => $request->email,
+            'role' => 'principal',
+            'password' => bcrypt($request->password), // Ensure to hash the password
             'trust_name' => $request->trust_name,
             'trust_registration_date' => $request->trust_registration_date,
             'trust_president_name' => $request->trust_president_name,
             'secretary_name' => $request->secretary_name,
             'treasurer_name' => $request->treasurer_name,
             'principal_name' => $request->principal_name,
-            'education_board_support' => $request->has('education_board_support'),
-            'government_support' => $request->has('government_support'),
-            'private_donations' => $request->has('private_donations'),
-            'donations_from_temples_and_mathas' => $request->has('donations_from_temples_and_mathas'),
+            'fund_resource' => $request->fund_resource,
             'setup_type' => $request->setup_type,
-            'focus_area' => implode(', ', $request->focus_area),
-            'registered_with_education_board' => $request->has('registered_with_education_board'),
-            'education_board_name' => $request->education_board_name,
-            'facilities' => implode(', ', $request->facilities),
+            'focus_area' => implode(', ', $request->focus_area), // Convert array to string
+            'registered_with_education_board' => $request->registered_with_education_board,
+            'education_board_name' => $request->registered_with_education_board === 'Yes' ? $request->education_board_name : null, // Store if registered
+            'facilities' => implode(', ', $request->facilities), // Convert array to string
         ]);
 
+        user::create([
+            'First_name' => $request->gurukul_name,
+            'Last_name' => $request->gurukul_name,
+            'Phone' => $request->mobile_number,
+            'email' => $request->email,
+            'role' => 'principal',
+            'password' => bcrypt($request->password), // Ensure to hash the password
+            'address' => $request->address,
+        ]);
+    
+        // Redirect back with success message
         return redirect()->back()->with('success', 'Gurukul Registration successfully submitted!');
     }
+    
 
     // view page of the gurukul registration
     public function gurukul_registration_page()

@@ -1,4 +1,4 @@
-@extends('layouts.sidebar')
+@extends('layouts.admin.sidebar')
 
 @section('content')
 <div class="container mx-auto p-6">
@@ -82,7 +82,7 @@
                     @csrf
                     <!-- Select gurukul -->
                     <div class="mb-3 center">
-                    <span class="text-danger" id="gurukulid-error"></span>
+                    <!-- <span class="text-danger" id="gurukulid-error"></span> -->
                         <select id="gurukulid" name="gurukulid" class="form-select form-control">
                             <option value="">Select Gurukul</option> 
                             @foreach($gurukuls as $gurukul)
@@ -92,7 +92,7 @@
                     </div>
                     <!-- select class -->
                     <div class="mb-3 center">
-                        <span class="text-danger" id="gurukulclass-error"></span>
+                        <!-- <span class="text-danger" id="gurukulclass-error"></span> -->
                         <select id="gurukulclass" name="std_class" class="form-select form-control">
                             <option value="">Select class</option> <!-- Optional placeholder option -->
                             @foreach($Add_student_class as $class)
@@ -103,85 +103,55 @@
                     
                     <!-- Student Details -->
                     <div class="mb-3 center">
-                        <!-- <label>Name:</label> -->
                         <span class="text-danger" id="name-error"></span>
                         <input type="text" id="name" name="name" placeholder="name" class="form-control" required><br>
                     </div>
                     <div class="mb-3 center">
-                        <!-- <label>Father's Name:</label> -->
-                        <!-- <span class="text-danger" id="father_name-error"></span> -->
                         <input type="text" id="father_name"name="father_name" placeholder="father_name" class="form-control" required><br>
                     </div>
                     <div class="mb-3 center">
-                        <!-- <label>Mother's Name:</label> -->
-                        <!-- <span class="text-danger" id="mother_name-error"></span> -->
                         <input type="text" id="mother_name" name="mother_name" placeholder="mother_name" class="form-control" required><br>
                     </div>
                     <div class="mb-3 center">
-                        <!-- <label>Date of Birth:</label> -->
-                        <!-- <span class="text-danger" id="date_of_birth-error"></span> -->
                         <input type="date" id="date_of_birth" name="date_of_birth" placeholder="date_of_birth" class="form-control" required><br>
                     </div>
                     <div class="mb-3 center">
-                        <!-- <label>Aadhaar Card:</label> -->
-                        <!-- <span class="text-danger" id="aadhaar_card-error"></span> -->
                         <input type="text" id="aadhaar_card" name="aadhaar_card" placeholder="aadhaar_card" class="form-control" maxlength="12" required><br>
                     </div>
                     <div class="mb-3 center">
-                        <!-- <label>Home Address:</label> -->
-                        <!-- <span class="text-danger" id="home_address-error"></span> -->
                         <input type="text" id="home_address" name="home_address" placeholder="home_address" class="form-control" required><br>
                     </div>
                     <div class="mb-3 center">
                     <h4>Father's Details</h4>
-                        <!-- <label>Father's Date of Birth:</label> -->
-                        <!-- <span class="text-danger" id="father_dob-error"></span> -->
                         <input type="date" id="father_dob" name="father_dob" placeholder="father_dob" class="form-control" required><br>
                     </div>
                     <div class="mb-3 center">
-                        <!-- <label>Father's Aadhaar Card:</label> -->
-                        <!-- <span class="text-danger" id="father_aadhaar_card-error"></span> -->
                         <input type="text" id="father_aadhaar_card" name="father_aadhaar_card" placeholder="father_aadhaar_card" class="form-control" maxlength="12" required><br>
                     </div>
                     <div class="mb-3 center">
-                        <!-- <label>Father's Address:</label> -->
-                        <!-- <span class="text-danger" id="father_address-error"></span> -->
                         <input type="text" id="father_address" name="father_address" placeholder="father_address" class="form-control" required><br>
                     </div>
                     <div class="mb-3 center">
-                        <!-- <label>Father's Mobile Number:</label> -->
-                        <!-- <span class="text-danger" id="father_mobile_number-error"></span> -->
                         <input type="text" id="father_mobile_number" name="father_mobile_number" placeholder="father_mobile_number" class="form-control" maxlength="10" required><br>
                     </div>
                     <div class="mb-3 center">
-                        <!-- <label>Father's Profession:</label> -->
-                        <!-- <span class="text-danger" id="father_profession-error"></span> -->
                         <input type="text" id="father_profession" name="father_profession" placeholder="father_profession" class="form-control" required><br>
                     </div>
                     <div class="mb-3 center">
                     <h4 class="">Mother's Details</h4>
-                        <!-- <label>Mother's Date of Birth:</label> -->
-                        <!-- <span class="text-danger" id="mother_dob-error"></span> -->
+
                         <input type="date" id="mother_dob" name="mother_dob" placeholder="mother_dob" class="form-control" required><br>
                     </div>
                     <div class="mb-3 center">
-                        <!-- <label>Mother's Aadhaar Card:</label> -->
-                        <!-- <span class="text-danger" id="father_profession-error"></span> -->
                         <input type="text" name="mother_aadhaar_card" placeholder="mother_aadhaar_card" class="form-control" maxlength="12" required><br>
                     </div>
                     <div class="mb-3 center">
-                        <!-- <label>Mother's Address:</label> -->
-                        <!-- <span class="text-danger" id="mother_address-error"></span> -->
                         <input type="text" id="mother_address" name="mother_address" placeholder="mother_address" class="form-control" required><br>
                     </div>
                     <div class="mb-3 center">
-                        <!-- <label>Mother's Mobile Number:</label> -->
-                        <!-- <span class="text-danger" id="mother_mobile_number-error"></span> -->
                         <input type="text" id="mother_mobile_number" name="mother_mobile_number" placeholder="mother_mobile_number" class="form-control" maxlength="10" required><br>
                     </div>
                     <div class="mb-3 center">
-                        <!-- <label>Mother's Profession:</label> -->
-                        <!-- <span class="text-danger" id="mother_profession-error"></span>  -->
                         <input type="text" id="mother_profession" name="mother_profession" placeholder="mother_profession" class="form-control" required><br>
                     </div>
                    

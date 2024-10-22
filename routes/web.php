@@ -47,12 +47,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+
 Route::get('/inventory_management', [AdminDashboardController::class, 'inventory_management'])->name('inventory.registration');
-Route::get('/gurukul_registration_page', [AdminDashboardController::class, 'gurukul_registration_page'])->name('gurukul.registration');
-Route::get('/gurukul/{id}/edit', [AdminDashboardController::class, 'edit'])->name('gurukul.edit');
-Route::post('/gurukul/{id}/update', [AdminDashboardController::class, 'update'])->name('gurukul.update');
-Route::delete('/gurukul/{id}', [AdminDashboardController::class, 'destroy'])->name('gurukul.destroy');
-Route::post('/gurukul/register', [AdminDashboardController::class, 'store'])->name('gurukul.register');
+Route::get('/gurukul_registration_page', [AdminDashboardController::class, 'gurukul_registration_page'])->name('gurukul.registration')->middleware('role:admin');
+Route::get('/gurukul/{id}/edit', [AdminDashboardController::class, 'edit'])->name('gurukul.edit')->middleware('role:admin');;
+Route::post('/gurukul/{id}/update', [AdminDashboardController::class, 'update'])->name('gurukul.update')->middleware('role:admin');;
+Route::delete('/gurukul/{id}', [AdminDashboardController::class, 'destroy'])->name('gurukul.destroy')->middleware('role:admin');;
+Route::post('/gurukul/register', [AdminDashboardController::class, 'store'])->name('gurukul.register')->middleware('role:admin');;
 
 Route::get('/student_registration', [AdminDashboardController::class, 'student_registration'])->name('student.registration');
 Route::post('/student-registration', [AdminDashboardController::class, 'stores'])->name('student.store');
