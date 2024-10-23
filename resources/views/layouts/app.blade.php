@@ -1,52 +1,68 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-        <!-- <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet"> -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-        <!-- <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script> -->
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans antialiased">
-        
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            @include('layouts.navigation')
-           
-           
-            <div class="flex-grow">
-            <div class="container mt-3">
-                <form action="{{ route('locale.change') }}" method="POST" class="d-inline">
-                    @csrf
-                    <select name="locale" onchange="this.form.submit()" class="form-select">
-                        <option value="en"{{ app()->getLocale() == 'en' ? ' selected' : '' }}>English</option>
-                        <option value="hi"{{ app()->getLocale() == 'hi' ? ' selected' : '' }}>Hindi</option>
-                    </select>
-                </form>
-            </div>
 
-            <!-- Page Heading -->
-            @isset($header)
-                <header class="bg-white dark:bg-gray-800 shadow">
-                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
+    <title>{{ config('app.name', 'Laravel') }}</title>
+
+    <!-- Fonts -->
+    @vite(['resources/css/app.css', 'resources/css/bootstrap.min.css', 'resources/css/font-awesome.min.css', 'resources/css/common.css'])
+</head>
+
+<body class="font-sans antialiased">
+    <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+        <main class="page-wrapper chiller-theme toggled">
+            <div class="page-content">
+                @include('layouts.navigation')
+                <div class="sidebarRightContentWrap">
+                    <div class="flex-grow">
+                        <!-- Page Heading -->
+                        @isset($header)
+                        <header class="bg-white dark:bg-gray-800 shadow">
+                            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                                {{ $header }}
+                            </div>
+                        </header>
+                        @endisset
+                        <!-- Page Content -->
+                        {{ $slot }}
+                        @yield('content')
                     </div>
-                </header>
-            @endisset
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+                </div>
             </div>
-        </div>
-    </body>
+
+        </main>
+    </div>
+
+    @vite(['resources/js/bootstrap.bundle.min.js', 'resources/js/app.js'])
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".sidebar-dropdown > a").click(function() {
+                $(".sidebar-submenu").slideUp(200);
+                if ($(this).parent().hasClass("active")) {
+                    $(".sidebar-dropdown").removeClass("active");
+                    $(this).parent().removeClass("active");
+                } else {
+                    $(".sidebar-dropdown").removeClass("active");
+                    $(this).next(".sidebar-submenu").slideDown(200);
+                    $(this).parent().addClass("active");
+                }
+            });
+
+            $("#close-sidebar").click(function() {
+                $(".page-wrapper").removeClass("toggled");
+            });
+
+            $("#show-sidebar").click(function() {
+                $(".page-wrapper").addClass("toggled");
+            });
+        });
+    </script>
+</body>
+
 </html>
