@@ -65,6 +65,7 @@ Route::delete('/teacher/{id}', [AdminDashboardController::class, 'destroyteacher
 Route::get('/teacher/{id}/edit', [AdminDashboardController::class, 'teacheredit'])->name('teacher.edit')->middleware('role:admin');
 Route::post('/teacher/{id}/update', [AdminDashboardController::class, 'teacherupdate'])->name('teacher.update')->middleware('role:admin');
 
+
 Route::get('/inventory_management', [AdminDashboardController::class, 'inventory_management'])->name('inventory.registration');
 Route::get('/libraray_managementsystem', [AdminDashboardController::class, 'create'])->name('librarymanage.registration');
 Route::post('/book-issues/store', [AdminDashboardController::class, 'storelibrarydata'])->name('book-issues.store');

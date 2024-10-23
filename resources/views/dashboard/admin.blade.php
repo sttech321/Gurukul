@@ -1,4 +1,4 @@
-@extends('layouts.sidebar')
+@extends('layouts.admin.sidebar')
   <x-slot name="header">
 
   </x-slot>

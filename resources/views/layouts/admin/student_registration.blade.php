@@ -1,4 +1,4 @@
-@extends('layouts.sidebar')
+@extends('layouts.admin.sidebar')
 
 @section('content')
 <div class="container mx-auto p-6">
@@ -71,6 +71,7 @@
                 @endforeach
             </tbody>
         </table>
+        {{ $student->links() }}
     </div>
 
 <div id="popup1" class="overlay">
@@ -82,7 +83,7 @@
                     @csrf
                     <!-- Select gurukul -->
                     <div class="mb-3 center">
-                    <span class="text-danger" id="gurukulid-error"></span>
+                    <!-- <span class="text-danger" id="gurukulid-error"></span> -->
                         <select id="gurukulid" name="gurukulid" class="form-select form-control">
                             <option value="">{{ __('messages.select_gurukul') }}</option> 
                             @foreach($gurukuls as $gurukul)
@@ -92,7 +93,7 @@
                     </div>
                     <!-- select class -->
                     <div class="mb-3 center">
-                        <span class="text-danger" id="gurukulclass-error"></span>
+                        <!-- <span class="text-danger" id="gurukulclass-error"></span> -->
                         <select id="gurukulclass" name="std_class" class="form-select form-control">
                             <option value="">{{ __('messages.select_class') }}</option> <!-- Optional placeholder option -->
                             
@@ -103,7 +104,6 @@
                     
                     <!-- Student Details -->
                     <div class="mb-3 center">
-                        <!-- <label>Name:</label> -->
                         <span class="text-danger" id="name-error"></span>
                         <input type="text" id="name" name="name" placeholder="{{ __('messages.name') }}" class="form-control" required><br>
                     </div>

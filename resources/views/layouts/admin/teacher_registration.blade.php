@@ -1,4 +1,4 @@
-@extends('layouts.sidebar')
+@extends('layouts.admin.sidebar')
 
 @section('content')
 <div class="container mx-auto p-6">
@@ -70,6 +70,7 @@
                 @endforeach
             </tbody>
         </table>
+        {{ $teacher->links() }}
     </div>
 
     <div id="popup1" class="overlay">

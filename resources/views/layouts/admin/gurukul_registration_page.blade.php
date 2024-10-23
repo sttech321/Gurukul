@@ -1,4 +1,4 @@
-@extends('layouts.sidebar')
+@extends('layouts.admin.sidebar')
 
 @section('content')
 <div class="container">
@@ -99,13 +99,26 @@
                         <input type="text" class="form-control" id="mobile_number" name="mobile_number" placeholder="{{ __('messages.mobile_number') }}" required>
                     </div>
                 
-                    <h3 class="center">{{ __('messages.trust_name') }}</h3>
-                
+
+                    <!-- email -->
+                    <div class="mb-3 center">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="email" class="form-control" required>
+                    </div>
+
+                    <!-- password -->
+                    <div class="mb-3 center">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="password " class="form-control" required>
+                    </div>
+
+                    <!-- role -->
+                    <input type="hidden" class="form-control" id="role" name="role" placeholder="role " class="form-control" required>
+
+                    <h3 class="center">{{ __('messages.trust_information') }}</h3>
+
                     <!-- Trust Name -->
                     <div class="mb-3 center">
                         <input type="text" id="trust_name" class="form-control" name="trust_name" placeholder="{{ __('messages.trust_name') }}" required>
                     </div>
-                
                     <!-- Trust Registration Date -->
                     <div class="mb-3 center">
                         <input type="date" class="form-control" id="trust_registration_date" name="trust_registration_date" placeholder="{{ __('messages.trust_registration_date') }}" required>
@@ -133,41 +146,75 @@
                 
                     <h3 class="center">{{ __('messages.type_of_setup') }}</h3>
                 
-                    <!-- Type of Setup -->
-                    <div class="mb-3 center">
-                        <select id="type_of_setup" class="form-control" name="setup_type">
-                            @foreach(__('messages.setup_type_options') as $key => $value)
-                            <option value="{{ $key }}">{{ $value }}</option>
-                        @endforeach
-                        </select>
-                    </div>
-                
-                    <h3 class="center">{{ __('messages.focus_area') }}</h3>
-                
-                    <!-- Focus Area of Gurukul -->
-                    <div class="mb-3 center">
-                        <select id="focus_area" class="form-control" name="focus_area[]" multiple>
-                            @foreach(__('messages.focus_area_options') as $key => $value)
-                            <option value="{{ $key }}">{{ $value }}</option>
-                        @endforeach
-                        </select>
-                    </div>
+<!-- Type of Setup -->
+<div class="mb-3 center">
+    <select id="type_of_setup" class="form-control" name="setup_type">
+        @foreach(__('messages.setup_type_options') as $key => $value)
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endforeach
+    </select> <!-- Closing select tag added here -->
+</div>
+
+<h3 class="center">{{ __('messages.fund_resources') }}</h3>
+
+<div class="mb-3 center">
+    <select id="fund_resource" class="form-control" name="fund_resource">
+        @foreach (__('messages.fundResources') as $key => $value)                          
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endforeach
+    </select>
+</div>
+
+<h3 class="center">{{ __('messages.focus_area') }}</h3>
+
+<!-- Focus Area of Gurukul -->
+<div class="mb-3 center">
+    <select id="focus_area" class="form-control" name="focus_area[]" multiple>
+        @foreach(__('messages.focus_area_options') as $key => $value)
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endforeach
+    </select>
+</div>
+
                 
                     <h3 class="center">{{ __('messages.facilities_available') }}</h3>
                 
                     <!-- Facilities Available (checkboxes) -->
-                    <div class="mb-3 center">
-                        @php
-                        $facilities = ['School Building', 'Classrooms', 'Library', 'Computer Room', 'Kala Room', 'Vyam Kasha', 'Farms', 'Kitchen', 'Gaushala', 'Ashwashala', 'Workshop', 'Yagna Shala'];
-                        @endphp
-                
-                        @foreach($facilities as $facility)
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="{{ strtolower(str_replace(' ', '_', $facility)) }}" name="facilities[]" value="{{ $facility }}">
-                                <label class="form-check-label" for="{{ strtolower(str_replace(' ', '_', $facility)) }}">{{$facility}}</label>
-                            </div>
-                        @endforeach
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="School_Building" name="facilities[]" value="{{ __('messages.school_building') }}">
+                        <label class="form-check-label" for="School_Building">{{ __('messages.school_building') }}</label><br>
+                    
+                        <input class="form-check-input" type="checkbox" id="Classrooms" name="facilities[]" value="{{ __('messages.classrooms') }}">
+                        <label class="form-check-label" for="Classrooms">{{ __('messages.classrooms') }}</label><br>
+                    
+                        <input class="form-check-input" type="checkbox" id="Library" name="facilities[]" value="{{ __('messages.library') }}">
+                        <label class="form-check-label" for="Library">{{ __('messages.library') }}</label><br>
+                    
+                        <input class="form-check-input" type="checkbox" id="ComputerRoom" name="facilities[]" value="{{ __('messages.computer_room') }}">
+                        <label class="form-check-label" for="ComputerRoom">{{ __('messages.computer_room') }}</label><br>
+                    
+                        <input class="form-check-input" type="checkbox" id="Kala_Room" name="facilities[]" value="{{ __('messages.kala_room') }}">
+                        <label class="form-check-label" for="Kala_Room">{{ __('messages.kala_room') }}</label><br>
+                    
+                        <input class="form-check-input" type="checkbox" id="Vyam_Kasha" name="facilities[]" value="{{ __('messages.vyam_kasha') }}">
+                        <label class="form-check-label" for="Vyam_Kasha">{{ __('messages.vyam_kasha') }}</label><br>
+                    
+                        <input class="form-check-input" type="checkbox" id="Farms" name="facilities[]" value="{{ __('messages.farms') }}">
+                        <label class="form-check-label" for="Farms">{{ __('messages.farms') }}</label><br>
+                    
+                        <input class="form-check-input" type="checkbox" id="Kitchen" name="facilities[]" value="{{ __('messages.kitchen') }}">
+                        <label class="form-check-label" for="Kitchen">{{ __('messages.kitchen') }}</label><br>
+                    
+                        <input class="form-check-input" type="checkbox" id="Ashwashala" name="facilities[]" value="{{ __('messages.ashwashala') }}">
+                        <label class="form-check-label" for="Ashwashala">{{ __('messages.ashwashala') }}</label><br>
+                    
+                        <input class="form-check-input" type="checkbox" id="Workshop" name="facilities[]" value="{{ __('messages.workshop') }}">
+                        <label class="form-check-label" for="Workshop">{{ __('messages.workshop') }}</label><br>
+                    
+                        <input class="form-check-input" type="checkbox" id="Yagna_Shala" name="facilities[]" value="{{ __('messages.yagna_shala') }}">
+                        <label class="form-check-label" for="Yagna_Shala">{{ __('messages.yagna_shala') }}</label><br>
                     </div>
+                    
                 
                     <h3 class="center">{{ __('messages.registered_with_education_board') }}</h3>
                 
@@ -304,19 +351,39 @@
                 <h3 class="center">Facilities Available</h3>
 
                 <!-- Facilities Available (checkboxes) -->
-                <div class="mb-3 center">
-                    <!-- <label class="form-label">Facilities Available</label><br> -->
-
-                    @php
-                    $facilities = ['School Building', 'Classrooms', 'Library', 'Computer Room', 'Kala Room', 'Vyam Kasha', 'Farms', 'Kitchen', 'Gaushala', 'Ashwashala', 'Workshop', 'Yagna Shala'];
-                    @endphp
-
-                    @foreach($facilities as $facility)
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="{{ strtolower(str_replace(' ', '_', $facility)) }}" name="facilities[]" value="{{ $facility }}">
-                            <label class="form-check-label" for="{{ strtolower(str_replace(' ', '_', $facility)) }}">{{ $facility }}</label>
-                        </div>
-                    @endforeach
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="School_Building" name="facilities[]" value="{{ __('messages.school_building') }}">
+                    <label class="form-check-label" for="School_Building">{{ __('messages.school_building') }}</label><br>
+                
+                    <input class="form-check-input" type="checkbox" id="Classrooms" name="facilities[]" value="{{ __('messages.classrooms') }}">
+                    <label class="form-check-label" for="Classrooms">{{ __('messages.classrooms') }}</label><br>
+                
+                    <input class="form-check-input" type="checkbox" id="Library" name="facilities[]" value="{{ __('messages.library') }}">
+                    <label class="form-check-label" for="Library">{{ __('messages.library') }}</label><br>
+                
+                    <input class="form-check-input" type="checkbox" id="ComputerRoom" name="facilities[]" value="{{ __('messages.computer_room') }}">
+                    <label class="form-check-label" for="ComputerRoom">{{ __('messages.computer_room') }}</label><br>
+                
+                    <input class="form-check-input" type="checkbox" id="Kala_Room" name="facilities[]" value="{{ __('messages.kala_room') }}">
+                    <label class="form-check-label" for="Kala_Room">{{ __('messages.kala_room') }}</label><br>
+                
+                    <input class="form-check-input" type="checkbox" id="Vyam_Kasha" name="facilities[]" value="{{ __('messages.vyam_kasha') }}">
+                    <label class="form-check-label" for="Vyam_Kasha">{{ __('messages.vyam_kasha') }}</label><br>
+                
+                    <input class="form-check-input" type="checkbox" id="Farms" name="facilities[]" value="{{ __('messages.farms') }}">
+                    <label class="form-check-label" for="Farms">{{ __('messages.farms') }}</label><br>
+                
+                    <input class="form-check-input" type="checkbox" id="Kitchen" name="facilities[]" value="{{ __('messages.kitchen') }}">
+                    <label class="form-check-label" for="Kitchen">{{ __('messages.kitchen') }}</label><br>
+                
+                    <input class="form-check-input" type="checkbox" id="Ashwashala" name="facilities[]" value="{{ __('messages.ashwashala') }}">
+                    <label class="form-check-label" for="Ashwashala">{{ __('messages.ashwashala') }}</label><br>
+                
+                    <input class="form-check-input" type="checkbox" id="Workshop" name="facilities[]" value="{{ __('messages.workshop') }}">
+                    <label class="form-check-label" for="Workshop">{{ __('messages.workshop') }}</label><br>
+                
+                    <input class="form-check-input" type="checkbox" id="Yagna_Shala" name="facilities[]" value="{{ __('messages.yagna_shala') }}">
+                    <label class="form-check-label" for="Yagna_Shala">{{ __('messages.yagna_shala') }}</label><br>
                 </div>
 
                 <h3 class="center">{{ __('messages.registered_with_education_board') }}</h3>
