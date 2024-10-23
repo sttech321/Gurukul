@@ -1,0 +1,9 @@
+/*----table-section-common*/
+.panel-info-wrap{box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);}
+.panel-info-wrap thead{background-color: #ededed;}
+.panel-info-wrap th {color: #727272;padding: 14px 20px;font-weight: 500;}
+.panel-info-wrap td{padding: 8px 20px;vertical-align: middle;text-transform: capitalize;}
+.panel-info-wrap table{margin:0;}
+.panel-info-wrap .table>:not(caption)>*>* {background-color: #b96e6e00;}
+.panel-info-wrap .innerPageContent .box {padding-top: 42px;padding-bottom: 26px;}
+.panel-info-wrap .table>:not(:last-child)>:last-child>* {border-bottom-color: #e3e3e3;}

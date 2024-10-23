@@ -16,7 +16,7 @@
 			<div class="sidebar-header flexBetween">
 				<div class="leftSec">
 					<div class="user-pic">
-						<img width="230" src="/image/person.jpg" alt="user picture">
+						<img width="230" src="/images/profile.png" alt="user picture">
 					</div>
 					<div class="user-info">
 						<span class="user-name">Jhon
@@ -34,7 +34,7 @@
 								<div class="dropdown-top flexBetween">
 									<div class="leftSec">
 										<div class="user-pic">
-											<img data-v-139b8be6="" width="230" src="/image/person.jpg" alt="user picture">
+											<img width="230" src="/images/profile.png" alt="user picture" />
 										</div>
 										<div class="user-info">
 											<span class="user-name">Jhon
@@ -95,15 +95,15 @@
 							<span>Student Registration and Deatils</span>
 						</a>
 					</li>
-          <li>
+					<li>
 						<a href="{{ route('add.class') }}">
 							<div class="imgIconWrap">
-								<img width="20" height="20" src="/images/teacher-registration.svg" alt="sidebar icon">
+								<img width="20" height="20" src="/images/add-class.svg" alt="sidebar icon">
 							</div>
 							<span>Add class</span>
 						</a>
 					</li>
-          <!-- <li>
+					<!-- <li>
 						<a href="{{ route('librarymanage.registration') }}">
 							<div class="imgIconWrap">
 								<img width="20" height="20" src="/images/teacher-registration.svg" alt="sidebar icon">
@@ -120,7 +120,7 @@
 						</a>
 					</li> -->
 
-					
+
 				</ul>
 			</div>
 		</div>
