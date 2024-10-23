@@ -6,7 +6,7 @@
         <a class="btn btn-primary" href="#popup1" onclick="openPopup('add')">Add new teacher</a>
     </div>
        <!-- Teacher List Table -->
-   <h1 class="text-center">Teacher Registration Page</h1><br>
+   <h1 class="text-center">Teacher Registration</h1><br>
     @if(session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
@@ -74,7 +74,7 @@
 
     <div id="popup1" class="overlay">
         <div class="popup">
-            <h1 class="text-center" id="form-title">Teacher Registration Page</h1>
+            <h1 class="text-center" id="form-title">Teacher Registration</h1>
             <a class="close" href="#">&times;</a>
             <div class="content">
                 <form action="{{ route('teacher.registration.store') }}" method="POST" class="form-control w-75 mx-auto mt-3">

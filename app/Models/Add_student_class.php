@@ -9,7 +9,7 @@ class Add_student_class extends Model
 {
     use HasFactory;
 
-    protected $table = 'add_student_class';
+    protected $table = 'add_student_classes';
 
     // Specify the fillable fields to allow mass assignment
     protected $fillable = [

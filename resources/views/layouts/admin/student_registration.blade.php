@@ -6,7 +6,7 @@
         <a class="btn btn-primary" href="#popup1" onclick="openPopup('add')">Add new Student</a>
     </div>
        <!-- Teacher List Table -->
-   <h1 class="text-center">Student Registration Page</h1><br>
+   <h1 class="text-center">Student Registration</h1><br>
     @if(session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
@@ -75,7 +75,7 @@
 
 <div id="popup1" class="overlay">
     <div class="popup">
-        <h3 class="text-center">Student Registration Form</h3>
+        <h3 class="text-center">Student Registration</h3>
             <a class="close" href="#">&times;</a>
             <div class="content">
                 <form id="studentform" action="{{ route('student.store') }}" method="POST" class="form-control mx-auto w-75 mt-3">
@@ -163,7 +163,7 @@
 </div>
 <div id="popup2" class="overlay">
     <div class="popup">
-        <h3 class="text-center">Student Registration Form</h3>
+        <h3 class="text-center">Student Registration</h3>
         <a class="close" href="#">&times;</a>
         <div class="content">
             <form id="studentforms" action="{{ route('student.store') }}" method="POST" class="form-control mx-auto mt-3 w-75">
@@ -303,117 +303,5 @@ function editstudentform(gurukulId) {
         })
         .catch(error => console.error('Error fetching data:', error));
 }
-
-// $(document).ready(function() {
-//     $('#studentform').on('submit', function(e) {
-//         e.preventDefault(); // Prevent default form submission
-
-//         // Clear previous error messages
-//         $('.text-danger').text('');
-
-//         // Perform client-side validation
-//         let valid = true;
-        
-//         if ($('#gurukulid').val() == "") {
-//             $('#gurukulid-error').text('Please select a Gurukul');
-//             valid = false;
-//         }
-
-//         if ($('#gurukulclass').val() == "") {
-//             $('#gurukulclass-error').text('Please select a gurukulclass');
-//             valid = false;
-//         }
-
-//         // if ($('#name').val() == "") {
-//         //     $('#name-error').text('Please select a Gurukul');
-//         //     valid = false;
-//         // }
-//         if ($('#name').val().trim() == "") {
-//             $('#name-error').text('Please enter a student name');
-//             valid = false;
-//         }
-        
-//         // if ($('#father_name').val() == "") {
-//         //     $('#father_name-error').text('Please select a Gurukul');
-//         //     valid = false;
-//         // }
-
-//         // if ($('#mother_name').val() == "") {
-//         //     $('#mother_name-error').text('Please select a Gurukul');
-//         //     valid = false;
-//         // }
-
-//         // if ($('#date_of_birth').val() == "") {
-//         //     $('#date_of_birth-error').text('Please select a Gurukul');
-//         //     valid = false;
-//         // }
-
-//         // if ($('#aadhaar_card').val() == "") {
-//         //     $('#aadhaar_card-error').text('Please select a Gurukul');
-//         //     valid = false;
-//         // }
-
-//         // if ($('#home_address').val() == "") {
-//         //     $('#home_address-error').text('Please select a Gurukul');
-//         //     valid = false;
-//         // }
-
-//         // if ($('#father_dob').val() == "") {
-//         //     $('#father_dob-error').text('Please select a Gurukul');
-//         //     valid = false;
-//         // }
-
-//         // if ($('#father_aadhaar_card').val() == "") {
-//         //     $('#father_aadhaar_card-error').text('Please select a Gurukul');
-//         //     valid = false;
-//         // }
-
-//         // if ($('#father_address').val() == "") {
-//         //     $('#father_address-error').text('Please select a Gurukul');
-//         //     valid = false;
-//         // }
-
-//         // if ($('#father_profession').val() == "") {
-//         //     $('#father_profession-error').text('Please select a Gurukul');
-//         //     valid = false;
-//         // }
-
-//         // if ($('#father_mobile_number').val() == "") {
-//         //     $('#father_mobile_number-error').text('Please select a Gurukul');
-//         //     valid = false;
-//         // }
-        
-//         // if ($('#mother_dob').val() == "") {
-//         //     $('#mother_dob-error').text('Please select a Gurukul');
-//         //     valid = false;
-//         // }
-
-//         // if ($('#mother_aadhaar_card').val() == "") {
-//         //     $('#mother_aadhaar_card-error').text('Please select a Gurukul');
-//         //     valid = false;
-//         // }
-
-//         // if ($('#mother_address').val() == "") {
-//         //     $('#mother_address-error').text('Please select a Gurukul');
-//         //     valid = false;
-//         // }
-
-//         // if ($('#mother_mobile_number').val() == "") {
-//         //     $('#mother_mobile_number-error').text('Please select a Gurukul');
-//         //     valid = false;
-//         // }
-
-//         // if ($('#mother_profession').val() == "") {
-//         //     $('#mother_profession-error').text('Please select a Gurukul');
-//         //     valid = false;
-//         // }
-
-//         // If all fields are valid, submit the form
-//         if (valid) {
-//             // Allow the form to submit via PHP
-//             this.submit();
-//         }
-//     });
-// });
 </script>
 @endsection

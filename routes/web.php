@@ -6,6 +6,7 @@ use App\Http\Controllers\PrincipalDashboardController;
 use App\Http\Controllers\AdminDashboardController;
 use Illuminate\Support\Facades\Auth; 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LocaleController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -45,29 +46,34 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/inventory_management', [AdminDashboardController::class, 'inventory_management'])->name('inventory.registration');
+// Routes for admin
 Route::get('/gurukul_registration_page', [AdminDashboardController::class, 'gurukul_registration_page'])->name('gurukul.registration')->middleware('role:admin');
-Route::get('/gurukul/{id}/edit', [AdminDashboardController::class, 'edit'])->name('gurukul.edit')->middleware('role:admin');;
-Route::post('/gurukul/{id}/update', [AdminDashboardController::class, 'update'])->name('gurukul.update')->middleware('role:admin');;
-Route::delete('/gurukul/{id}', [AdminDashboardController::class, 'destroy'])->name('gurukul.destroy')->middleware('role:admin');;
-Route::post('/gurukul/register', [AdminDashboardController::class, 'store'])->name('gurukul.register')->middleware('role:admin');;
+Route::get('/gurukul/{id}/edit', [AdminDashboardController::class, 'edit'])->name('gurukul.edit')->middleware('role:admin');
+Route::post('/gurukul/{id}/update', [AdminDashboardController::class, 'update'])->name('gurukul.update')->middleware('role:admin');
+Route::delete('/gurukul/{id}', [AdminDashboardController::class, 'destroy'])->name('gurukul.destroy')->middleware('role:admin');
+Route::post('/gurukul/register', [AdminDashboardController::class, 'store'])->name('gurukul.register')->middleware('role:admin');
 
-Route::get('/student_registration', [AdminDashboardController::class, 'student_registration'])->name('student.registration');
-Route::post('/student-registration', [AdminDashboardController::class, 'stores'])->name('student.store');
-Route::delete('/student/{id}', [AdminDashboardController::class, 'destroystudenttable'])->name('student.destroy');
-Route::get('/student/{id}/edit', [AdminDashboardController::class, 'studentedit'])->name('student.edit');
-Route::post('/student/{id}/update', [AdminDashboardController::class, 'studentupdate'])->name('student.update');
+Route::get('/student_registration', [AdminDashboardController::class, 'student_registration'])->name('student.registration')->middleware('role:admin');
+Route::post('/student-registration', [AdminDashboardController::class, 'stores'])->name('student.store')->middleware('role:admin');
+Route::delete('/student/{id}', [AdminDashboardController::class, 'destroystudenttable'])->name('student.destroy')->middleware('role:admin');
+Route::get('/student/{id}/edit', [AdminDashboardController::class, 'studentedit'])->name('student.edit')->middleware('role:admin');
+Route::post('/student/{id}/update', [AdminDashboardController::class, 'studentupdate'])->name('student.update')->middleware('role:admin');
 
-Route::post('/teacher-registration', [AdminDashboardController::class, 'storing_teacher_registration_data'])->name('teacher.registration.store');
-Route::get('/teacher_registration', [AdminDashboardController::class, 'teacher_registration'])->name('teacher.registration');
-Route::delete('/teacher/{id}', [AdminDashboardController::class, 'destroyteachertable'])->name('teacher.destroy');
-Route::get('/teacher/{id}/edit', [AdminDashboardController::class, 'teacheredit'])->name('teacher.edit');
-Route::post('/teacher/{id}/update', [AdminDashboardController::class, 'teacherupdate'])->name('teacher.update');
+Route::post('/teacher-registration', [AdminDashboardController::class, 'storing_teacher_registration_data'])->name('teacher.registration.store')->middleware('role:admin');
+Route::get('/teacher_registration', [AdminDashboardController::class, 'teacher_registration'])->name('teacher.registration')->middleware('role:admin');
+Route::delete('/teacher/{id}', [AdminDashboardController::class, 'destroyteachertable'])->name('teacher.destroy')->middleware('role:admin');
+Route::get('/teacher/{id}/edit', [AdminDashboardController::class, 'teacheredit'])->name('teacher.edit')->middleware('role:admin');
+Route::post('/teacher/{id}/update', [AdminDashboardController::class, 'teacherupdate'])->name('teacher.update')->middleware('role:admin');
 
+Route::get('/inventory_management', [AdminDashboardController::class, 'inventory_management'])->name('inventory.registration');
 Route::get('/libraray_managementsystem', [AdminDashboardController::class, 'create'])->name('librarymanage.registration');
 Route::post('/book-issues/store', [AdminDashboardController::class, 'storelibrarydata'])->name('book-issues.store');
 Route::post('/books', [AdminDashboardController::class, 'storebookdata'])->name('books.store');
+// Routes for admin
 
+// Routes for principal
+
+// Routes for principal
 // Route::post('/library/store', [AdminDashboardController::class, 'create'])->name('library.store');
 Route::get('/add_new_class', [AdminDashboardController::class, 'showStdClass'])->name('add.class');
 // Route to create a new class
@@ -78,6 +84,9 @@ Route::post('/class/update/{id}', [AdminDashboardController::class, 'updatenewcl
 Route::delete('/class/delete/{id}', [AdminDashboardController::class, 'deletenewclass'])->name('class.delete');
 // Route to edit a class (fetch data for editing)
 Route::get('/class/edit/{id}', [AdminDashboardController::class, 'editnewclass'])->name('class.edit');
+
+Route::post('/locale', LocaleController::class)->name('locale.change');
+
 
 Route::get('/child', function () {
     return view('layouts/child');

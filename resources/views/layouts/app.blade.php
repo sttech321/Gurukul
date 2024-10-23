@@ -24,6 +24,16 @@
            
            
             <div class="flex-grow">
+            <div class="container mt-3">
+                <form action="{{ route('locale.change') }}" method="POST" class="d-inline">
+                    @csrf
+                    <select name="locale" onchange="this.form.submit()" class="form-select">
+                        <option value="en"{{ app()->getLocale() == 'en' ? ' selected' : '' }}>English</option>
+                        <option value="hi"{{ app()->getLocale() == 'hi' ? ' selected' : '' }}>Hindi</option>
+                    </select>
+                </form>
+            </div>
+
             <!-- Page Heading -->
             @isset($header)
                 <header class="bg-white dark:bg-gray-800 shadow">

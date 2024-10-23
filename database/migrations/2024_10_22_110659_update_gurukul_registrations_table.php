@@ -18,6 +18,8 @@ class UpdateGurukulRegistrationsTable extends Migration
             $table->string('role')->after('password');
             $table->enum('fund_resource', ['education_board_support', 'government_support', 'private_donations', 'Gruh donations_from_temples_and_mathas']);
 
+            // Modify 'registered_with_education_board' to ENUM('Yes', 'No')
+            \DB::statement("ALTER TABLE gurukul_registrations MODIFY registered_with_education_board ENUM('Yes', 'No')");
             // Drop the old fields
             $table->dropColumn([
                 'education_board_support',
@@ -42,6 +44,9 @@ class UpdateGurukulRegistrationsTable extends Migration
 
             // Drop the new columns
             $table->dropColumn(['email', 'password', 'role']);
+
+            // Revert 'registered_with_education_board' back to its original state if needed
+            \DB::statement("ALTER TABLE gurukul_registrations MODIFY registered_with_education_board VARCHAR(255)"); // Assuming the previous type was VARCHAR
         });
     }
 }

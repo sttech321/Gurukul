@@ -28,7 +28,6 @@
           <i data-feather='chevron-left'></i>
         </button>
       </div>
-
       <ul class='text-gray-500 font-semibold flex flex-col gap-2'>
         <li>
           <a href="#" class='flex items-center rounded px-3 py-2 hover:text-black hover:bg-gray-50  transition-all'>
@@ -111,36 +110,3 @@
     </div>
   </div>
   </x-app-layout>
-<script>
-// feather.replace();
-
-const btnOpenMenu = document.querySelector(".btn-open-menu");
-const btnCloseMenu = document.querySelector(".btn-close-menu");
-const aside = document.querySelector("aside");
-const header = document.querySelector("header");
-const main = document.querySelector("main");
-const body = document.querySelector("body");
-
-btnOpenMenu.addEventListener("click", (event) => {
-  event.stopPropagation();
-
-  aside.classList.remove("closed");
-  body.classList.add("pointer-events-none", "overflow-hidden");
-  aside.classList.add("pointer-events-auto");
-});
-
-btnCloseMenu.addEventListener("click", (event) => {
-  aside.classList.add("closed");
-  body.classList.remove("pointer-events-none", "overflow-hidden");
-});
-
-aside.addEventListener("click", (event) => {
-  event.stopPropagation();
-});
-
-document.addEventListener("click", (event) => {
-  aside.classList.add("closed");
-  body.classList.remove("pointer-events-none", "overflow-hidden");
-});
-
-</script>

@@ -14,8 +14,11 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'role' => \App\Http\Middleware\CheckRole::class,
         ]);
+
+        // Corrected way to append middleware to the web group
+        $middleware->web(append: [
+            \App\Http\Middleware\LocaleMiddleware::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        //
     })->create();
-

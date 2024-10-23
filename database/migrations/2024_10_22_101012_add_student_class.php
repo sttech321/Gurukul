@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('add_student_class', function (Blueprint $table) {
+        Schema::create('add_student_classes', function (Blueprint $table) {
             $table->id();
             $table->string('std_classes')->unique(); // Column for class
             $table->timestamps();
@@ -20,7 +20,7 @@ return new class extends Migration
     
     public function down()
     {
-        Schema::dropIfExists('add_student_class');
+        Schema::dropIfExists('add_student_classes');
     }
     
 };

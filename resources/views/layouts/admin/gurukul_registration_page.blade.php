@@ -3,10 +3,10 @@
 @section('content')
 <div class="container">
     <div class="box">
-        <a class="btn btn-primary" href="#popup1" onclick="('add')">Add New School</a>
+        <a class="btn btn-primary" href="#popup1" onclick="('add')">{{ __('messages.add_new_school') }}</a>
     </div>
    <!-- Gurukul List Table -->
-   <h1 class="text-center">Gurukul Registration</h1>
+   <h1 class="text-center">{{ __('messages.gurukul_registration') }}</h1>
     @if(session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
@@ -29,26 +29,26 @@
             <thead class="">
                 <tr>
                     <th scope="col" class="px-6 py-3">
-                        Gurukul Name
+                        {{ __('messages.gurukul_name') }}
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Address
+                        {{ __('messages.address') }}
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Mobile Number
+                        {{ __('messages.mobile_number') }}
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Trust Name
+                        {{ __('messages.trust_name') }}
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Action
+                        {{ __('messages.action') }}
                     </th>
                 </tr>
             </thead>
             <tbody>
             @foreach($gurukuls as $registration)
                 <tr class="">
-                    <td class="px-6 py-4">
+                    <td class="">
                     {{ $registration->gurukul_name }}
                     </td>
                     <td class="px-6 py-4">
@@ -61,11 +61,11 @@
                     {{ $registration->trust_name }}
                     </td>
                     <td class="px-6 py-4">
-                        <a href="#popup2" class="edit-gurukul btn btn-primary" onclick="editstudentform({{ $registration->id }})">Edit</a>
+                        <a href="#popup2" class="edit-gurukul btn btn-primary" onclick="editstudentform({{ $registration->id }})">{{ __('messages.edit') }}</a>
                         <form action="{{ route('gurukul.destroy', $registration->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <button type="submit" class="btn btn-danger">{{ __('messages.delete') }}</button>
                         </form>
                     </td>
                 </tr>
@@ -76,7 +76,7 @@
 
     <div id="popup1" class="overlay">
         <div class="popup">
-            <h1 class="text-center" id="form-title">Gurukul Registration</h1>
+            <h2 class="text-center">{{ __('messages.gurukul_registration') }}</h2>
             <a class="close mb-3" href="#">&times;</a>
             <div class="content">
                 <form id="gurukulForm" action="{{ route('gurukul.register') }}" method="POST" class="gurukul registration row g-3 mt-3 form-control w-75 mx-auto">
