@@ -72,7 +72,7 @@ class AdminDashboardController extends Controller
     // view page of the gurukul registration
     public function gurukul_registration_page()
     {
-        $gurukuls = GurukulRegistration::all();
+        $gurukuls = GurukulRegistration::paginate(5);
         return view('layouts/admin/gurukul_registration_page',compact('gurukuls'));
     }
 
@@ -139,8 +139,8 @@ class AdminDashboardController extends Controller
     // view page of the teacher registration
     public function teacher_registration()
     {
-        $gurukuls = GurukulRegistration::all();
-        $teacher = TeacherRegistration::all();
+        $gurukuls = GurukulRegistration::paginate(5);
+        $teacher = TeacherRegistration::paginate(5);
         return view('layouts.admin.teacher_registration', compact('teacher', 'gurukuls'));
     }
 

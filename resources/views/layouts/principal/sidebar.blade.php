@@ -1,6 +1,5 @@
 @vite(['resources/css/app.css'])
 <x-app-layout>
-
 	<a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
 		<i class="fas fa-bars"></i>
 	</a>
@@ -69,15 +68,7 @@
 			<div class="sidebar-menu">
 				<ul>
 					<li>
-						<a href="{{ route('gurukul.registration') }}">
-							<div class="imgIconWrap">
-								<img width="20" height="20" src="/images/registration.svg" alt="sidebar icon">
-							</div>
-							<span> Gurukul Registration </span>
-						</a>
-					</li>
-					<li>
-						<a href="{{ route('teacher.registration') }}">
+						<a href="{{ route('teacher.form.create') }}">
 							<div class="imgIconWrap">
 								<img width="20" height="20" src="/images/student-registration.svg" alt="sidebar icon">
 							</div>
@@ -85,37 +76,13 @@
 						</a>
 					</li>
 					<li>
-						<a href="{{ route('student.registration') }}">
+						<a href="">
 							<div class="imgIconWrap">
 								<img width="20" height="20" src="/images/teacher-registration.svg" alt="sidebar icon">
 							</div>
-							<span>Student Registration and Deatils</span>
+							<span>Student Registration</span>
 						</a>
-					</li>
-          <li>
-						<a href="{{ route('add.class') }}">
-							<div class="imgIconWrap">
-								<img width="20" height="20" src="/images/teacher-registration.svg" alt="sidebar icon">
-							</div>
-							<span>Add class</span>
-						</a>
-					</li>
-          <!-- <li>
-						<a href="{{ route('librarymanage.registration') }}">
-							<div class="imgIconWrap">
-								<img width="20" height="20" src="/images/teacher-registration.svg" alt="sidebar icon">
-							</div>
-							<span>Libraray management</span>
-						</a>
-					</li>
-          <li>
-						<a href="{{ route('inventory.registration') }}">
-							<div class="imgIconWrap">
-								<img width="20" height="20" src="/images/teacher-registration.svg" alt="sidebar icon">
-							</div>
-							<span>Inventory Management System</span>
-						</a>
-					</li> -->					
+					</li>			
 				</ul>
 			</div>
 		</div>

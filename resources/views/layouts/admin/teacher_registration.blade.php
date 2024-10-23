@@ -60,7 +60,7 @@
                     </td>
                     <td class="px-6 py-4">
                         <a href="#popup2" class="edit-gurukul btn btn-primary" onclick="editstudentform({{ $registration->id }})">Edit</a>
-                        <form action="{{ route('teacher.destroy', $registration->id) }}" method="POST" style="display:inline;">
+                        <form action="{{ route('teacher.destroyAdmin', $registration->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Delete</button>
@@ -70,6 +70,7 @@
                 @endforeach
             </tbody>
         </table>
+        {{ $teacher->links() }}
     </div>
 
     <div id="popup1" class="overlay">
@@ -77,7 +78,7 @@
             <h1 class="text-center" id="form-title">Teacher Registration</h1>
             <a class="close" href="#">&times;</a>
             <div class="content">
-                <form action="{{ route('teacher.registration.store') }}" method="POST" class="form-control w-75 mx-auto mt-3">
+                <form action="{{ route('teacher.registration.storeAdmin') }}" method="POST" class="form-control w-75 mx-auto mt-3">
                     @csrf
                     <div class="mb-3 center">
                     <select id="gurukulid" name="gurukulid" class="form-select form-control">
@@ -158,10 +159,10 @@
 
 <div id="popup2" class="overlay">
     <div class="popup">
-        <h1 class="text-center" id="form-title">Teacher Registration Page</h1>
+        <h1 class="text-center" id="form-title">Teacher Registration</h1>
         <a class="close" href="#">&times;</a>
         <div class="content">
-            <form id="teacherform" action="{{ route('teacher.registration.store') }}" method="POST" class="form-control mt-3 w-75 mx-auto">
+            <form id="teacherform" action="{{ route('teacher.registration.storeAdmin') }}" method="POST" class="form-control mt-3 w-75 mx-auto">
                 @csrf
                 <!-- Gurukul name -->
                 <div class="mb-3 center">
@@ -169,7 +170,7 @@
                     <select id="gurukulid" name="gurukulid" class="form-select form-control">
                         <option value="">Select Gurukul</option> <!-- Optional placeholder option -->
                         @foreach($gurukuls as $gurukul)
-                            <option value="{{ $gurukul->id }}">{{ $gurukul->gurukul_name  }}</option> <!-- Replace 'id' with the actual field you want to use as value -->
+                            <option value="{{ $gurukul->id }}">{{ $gurukul->gurukul_name }}</option> <!-- Replace 'id' with the actual field you want to use as value -->
                         @endforeach
                     </select>
                 </div>
@@ -243,9 +244,9 @@
 </div>
 
 <script>
-function editstudentform(gurukulId) {
+function editstudentform(gurukulId) { 
     // Fetch the data via AJAX
-    fetch(`/teacher/${gurukulId}/edit`)
+    fetch(`teacher/${gurukulId}/edit`)
         .then(response => response.json())
         .then(data => {
             // Get the form element
@@ -271,7 +272,7 @@ function editstudentform(gurukulId) {
             form.querySelector('#exceptional_abilities').value = data.exceptional_abilities;
             form.querySelector('#modern_education_qualifications').value = data.modern_education_qualifications;
 
-            form.action = `/teacher/${gurukulId}/update`; 
+            form.action = `/admin/teacher/${gurukulId}/update`; 
 
         })
         .catch(error => console.error('Error fetching data:', error));

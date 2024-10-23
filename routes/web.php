@@ -59,11 +59,14 @@ Route::delete('/student/{id}', [AdminDashboardController::class, 'destroystudent
 Route::get('/student/{id}/edit', [AdminDashboardController::class, 'studentedit'])->name('student.edit')->middleware('role:admin');
 Route::post('/student/{id}/update', [AdminDashboardController::class, 'studentupdate'])->name('student.update')->middleware('role:admin');
 
-Route::post('/teacher-registration', [AdminDashboardController::class, 'storing_teacher_registration_data'])->name('teacher.registration.store')->middleware('role:admin');
-Route::get('/teacher_registration', [AdminDashboardController::class, 'teacher_registration'])->name('teacher.registration')->middleware('role:admin');
-Route::delete('/teacher/{id}', [AdminDashboardController::class, 'destroyteachertable'])->name('teacher.destroy')->middleware('role:admin');
-Route::get('/teacher/{id}/edit', [AdminDashboardController::class, 'teacheredit'])->name('teacher.edit')->middleware('role:admin');
-Route::post('/teacher/{id}/update', [AdminDashboardController::class, 'teacherupdate'])->name('teacher.update')->middleware('role:admin');
+Route::prefix('admin')->group(function () {
+    Route::get('/teacher_registration', [AdminDashboardController::class, 'teacher_registration'])->name('teacher.registration')->middleware('role:admin');
+    Route::post('/teacher-registration', [AdminDashboardController::class, 'storing_teacher_registration_data'])->name('teacher.registration.storeAdmin')->middleware('role:admin');
+    Route::delete('/teacher/{id}', [AdminDashboardController::class, 'destroyteachertable'])->name('teacher.destroyAdmin')->middleware('role:admin');
+    Route::get('/teacher/{id}/edit', [AdminDashboardController::class, 'teacheredit'])->name('teacher.editAdmin')->middleware('role:admin');
+    Route::post('/teacher/{id}/update', [AdminDashboardController::class, 'teacherupdate'])->name('teacher.updateAdmin')->middleware('role:admin');
+});
+
 
 Route::get('/inventory_management', [AdminDashboardController::class, 'inventory_management'])->name('inventory.registration');
 Route::get('/libraray_managementsystem', [AdminDashboardController::class, 'create'])->name('librarymanage.registration');
@@ -73,7 +76,16 @@ Route::post('/books', [AdminDashboardController::class, 'storebookdata'])->name(
 
 // Routes for principal
 
+Route::prefix('principal')->group(function () {
+    Route::get('/teacher_registration', [PrincipalDashboardController::class, 'teacher_registration_page'])->name('teacher.form.create')->middleware('role:principal');
+    Route::post('/teacher-registration', [AdminDashboardController::class, 'storing_teacher_registration_data'])->name('teacher.registration.store')->middleware('role:principal');
+    Route::delete('/teacher/{id}', [AdminDashboardController::class, 'destroyteachertable'])->name('teacher.destroy')->middleware('role:principal');
+    Route::get('/teacher/{id}/edit', [AdminDashboardController::class, 'teacheredit'])->name('teacher.edit')->middleware('role:principal');
+    Route::post('/teacher/{id}/update', [AdminDashboardController::class, 'teacherupdate'])->name('teacher.update')->middleware('role:principal');
+});
+
 // Routes for principal
+
 // Route::post('/library/store', [AdminDashboardController::class, 'create'])->name('library.store');
 Route::get('/add_new_class', [AdminDashboardController::class, 'showStdClass'])->name('add.class');
 // Route to create a new class
