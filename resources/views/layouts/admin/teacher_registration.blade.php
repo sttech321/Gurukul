@@ -96,6 +96,19 @@
                         <!-- <label for="father_name">Father's Name:</label> -->
                         <input type="text" id="father_name" name="father_name" placeholder="Father's Name" required class="form-control">
                     </div>
+                    <div class="col-12 col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="email" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="password " class="form-control" required>
+                        </div>
+                    </div>
+                    <input type="hidden" class="form-control" id="role" name="role" placeholder="role " class="form-control" required>
                     <div class="mb-3 center">
                         <!-- <label for="mother_name">Mother's Name:</label> -->
                         <input type="text" id="mother_name" name="mother_name" placeholder="Mother's Name" required class="form-control">

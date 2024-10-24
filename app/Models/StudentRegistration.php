@@ -31,6 +31,7 @@ class StudentRegistration extends Model
         'mother_address',
         'mother_mobile_number',
         'mother_profession',
+        'teacherid',
     ];
     
 }

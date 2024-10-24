@@ -22,19 +22,19 @@ class AdminDashboardController extends Controller
     }
 
     // Store gurukul registration page form data
-    public function store(Request $request)
-    {
-        // Validate incoming request
+    public function store(Request $request){
+        // dd($request);
+    // // Validate incoming request
         $request->validate([
             'gurukul_name' => 'required|string|max:255',
             'address' => 'required|string',
-            'mobile_number' => 'required|string|max:15',
+            'mobile_number' => 'required|string|max:15|',
             'email' => 'required|email|max:255',
             'password' => 'required|string|min:8',
         ]);
-    
-        // Create Gurukul registration record
-        GurukulRegistration::create([
+
+        // Create Gurukul registration record and retrieve the created ID
+        $gurukul = GurukulRegistration::create([
             'gurukul_name' => $request->gurukul_name,
             'address' => $request->address,
             'mobile_number' => $request->mobile_number,
@@ -55,16 +55,18 @@ class AdminDashboardController extends Controller
             'facilities' => implode(', ', $request->facilities), // Convert array to string
         ]);
 
+        // Now use the ID of the created GurukulRegistration record in the user::create
         user::create([
+            'common_id' => $gurukul->id, // Use the ID from the previous create operation
             'First_name' => $request->gurukul_name,
             'Last_name' => $request->gurukul_name,
-            'Phone' => $request->mobile_number,
+            'mobile_number' => $request->mobile_number,
             'email' => $request->email,
             'role' => 'principal',
             'password' => bcrypt($request->password), // Ensure to hash the password
             'address' => $request->address,
         ]);
-    
+
         // Redirect back with success message
         return redirect()->back()->with('success', 'Gurukul Registration successfully submitted!');
     }
@@ -212,6 +214,8 @@ class AdminDashboardController extends Controller
         $validatedData = $request->validate([
             'gurukulid' => 'required',
             'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'password' => 'required|string|min:8',
             'father_name' => 'required|string|max:255',
             'mother_name' => 'required|string|max:255',
             'surname' => 'nullable|string|max:255',
@@ -230,9 +234,12 @@ class AdminDashboardController extends Controller
 
         // Store the validated data in the database
 
-        TeacherRegistration::create([
+        $teacher = TeacherRegistration::create([
             'gurukulid' => $validatedData['gurukulid'],
             'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'role' => 'teacher',
+            'password' => bcrypt($validatedData['password']), // Ensure to hash the password
             'father_name' => $validatedData['father_name'],
             'mother_name' => $validatedData['mother_name'],
             'surname' => $validatedData['surname'],
@@ -247,6 +254,18 @@ class AdminDashboardController extends Controller
             'extra_ordinary_skills' => $validatedData['extra_ordinary_skills'],
             'exceptional_abilities' => $validatedData['exceptional_abilities'],
             'modern_education_qualifications' => $validatedData['modern_education_qualifications']
+        ]);
+
+         // Now use the ID of the created GurukulRegistration record in the user::create
+         user::create([
+            'common_id' => $teacher->id, // Use the ID from the previous create operation
+            'First_name' => $request->name,
+            'Last_name' => $request->name,
+            'mobile_number' => $request->mobile_number,
+            'email' => $request->email,
+            'role' => 'teacher',
+            'password' => bcrypt($request->password), // Ensure to hash the password
+            'address' => $request->home_address,
         ]);
 
         // Redirect back with a success message
@@ -333,10 +352,10 @@ class AdminDashboardController extends Controller
     // Store student registration page form data
     public function stores(Request $request)
     {
-        // Validate the form data
         $validatedData = $request->validate([
             'gurukulid' => 'required',
             'std_class' => 'required',
+            'teacherid' => 'required',
             'name' => 'required|string|max:255',
             'email' => 'required',
             'password' => 'required',
@@ -356,9 +375,11 @@ class AdminDashboardController extends Controller
             'mother_mobile_number' => 'required|string|max:10|min:10',
             'mother_profession' => 'required|string|max:255',
         ]);
+        
 
-        StudentRegistration::create([
+        $student = StudentRegistration::create([
             'gurukulid' => $validatedData['gurukulid'],
+            'teacherid' => $validatedData['teacherid'],
             'std_class' => $validatedData['std_class'],
             'name' => $validatedData['name'],
             'email' => $request->email,
@@ -382,9 +403,10 @@ class AdminDashboardController extends Controller
         ]);
 
         user::create([
+            'common_id' => $student->id,
             'First_name' => $request->name,
             'Last_name' => $request->name,
-            'Phone' => $request->father_mobile_number,
+            'mobile_number' => $request->father_mobile_number,
             'email' => $request->email,
             'role' => 'teacher',
             'password' => bcrypt($request->password), // Ensure to hash the password
@@ -393,6 +415,13 @@ class AdminDashboardController extends Controller
 
         // Redirect back with a success message
         return redirect()->back()->with('success', 'Student registration data stored successfully!');
+    }
+
+    // Controller method to handle the AJAX request
+    public function fetchTeachers(Request $request)
+    {
+        $teachers = TeacherRegistration::where('gurukulid', $request->gurukulid)->get();
+        return response()->json($teachers);
     }
 
     // Add new class fucntionality start here

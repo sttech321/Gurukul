@@ -102,6 +102,12 @@
                         </select>
                     </div>
 
+                    <!-- Select Teacher (Populated via AJAX) -->
+                    <div class="mb-3">
+                        <select id="teacherid" name="teacherid" class="form-select form-control">
+                            <option value="">Select Teacher</option>
+                        </select>
+                    </div>
                     <!-- Student Details -->
                     <div class="mb-3 center">
                         <span class="text-danger" id="name-error"></span>
@@ -314,5 +320,41 @@
             })
             .catch(error => console.error('Error fetching data:', error));
     }
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // When the gurukulid dropdown changes
+        $('#gurukulid').on('change', function() {
+            var gurukulid = $(this).val(); // Get the selected gurukulid
+            
+            if (gurukulid) {
+                // Make an AJAX request to fetch teachers based on the selected gurukulid
+                $.ajax({
+                    url: "{{ route('fetch.teachers') }}", // Use the route to fetch teachers
+                    type: "POST",
+                    data: {
+                        gurukulid: gurukulid,
+                        _token: "{{ csrf_token() }}" // Include CSRF token for security
+                    },
+                    success: function(response) {
+                        $('#teacherid').empty(); // Clear previous options
+                        $('#teacherid').append('<option value="">Select Teacher</option>'); // Default option
+
+                        // Loop through the response and append each teacher as an option
+                        $.each(response, function(key, teacher) {
+                            $('#teacherid').append('<option value="' + teacher.id + '">' + teacher.name + '</option>');
+                        });
+                    },
+                    error: function() {
+                        alert('Error fetching teacher data.');
+                    }
+                });
+            } else {
+                $('#teacherid').empty(); // Clear the teacher dropdown if no gurukul is selected
+                $('#teacherid').append('<option value="">Select Teacher</option>'); // Reset default option
+            }
+        });
+    });
 </script>
 @endsection

@@ -16,14 +16,20 @@ class User extends Authenticatable
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
+     * 
      */
+
+     protected $table = 'users';
+
+
     protected $fillable = [
         'First_name',
         'Last_name',
-        'Phone',
+        'mobile_number',
         'email',
         'address',
         'role',
+        'common_id',
         'password',
         
     ];

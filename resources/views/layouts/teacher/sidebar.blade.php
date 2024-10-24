@@ -1,4 +1,4 @@
-<!-- @vite(['resources/css/app.css']) -->
+@vite(['resources/css/app.css'])
 <x-app-layout>
 	<a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
 		<i class="fas fa-bars"></i>
@@ -6,7 +6,6 @@
 	<nav id="sidebar" class="sidebar-wrapper">
 		<div class="sidebar-content">
 			<div class="sidebar-brand">
-				<!-- <a href="#"> <img width="120" src="/image/login-img.png" /></a> -->
 				<a href="{{ route('dashboard') }}"><span class="logo">GuruKul</span> </a>
 				<div id="close-sidebar">
 					<i class="fas fa-times"></i>
@@ -81,4 +80,4 @@
 	</nav>
 	<!-- sidebar-wrapper  -->
 
-</x-app-layout>
+	</x-app-layout>

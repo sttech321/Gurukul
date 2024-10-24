@@ -82,7 +82,7 @@ Route::prefix('admin')->group(function () {
 
 Route::prefix('principal')->group(function () {
     Route::get('/teacher_registration', [PrincipalDashboardController::class, 'teacher_registration_page'])->name('teacher.form.create')->middleware('role:principal');
-    Route::post('/teacher-registration', [AdminDashboardController::class, 'storing_teacher_registration_data'])->name('teacher.registration.store')->middleware('role:principal');
+    Route::post('/teacher-registration', [AdminDashboardController::class, 'storing_teacher_registration_data'])->name('teacher.registration.stores')->middleware('role:principal');
     Route::delete('/teacher/{id}', [AdminDashboardController::class, 'destroyteachertable'])->name('teacher.destroy')->middleware('role:principal');
     Route::get('/teacher/{id}/edit', [AdminDashboardController::class, 'teacheredit'])->name('teacher.edit')->middleware('role:principal');
     Route::post('/teacher/{id}/update', [AdminDashboardController::class, 'teacherupdate'])->name('teacher.update')->middleware('role:principal');
@@ -94,6 +94,7 @@ Route::prefix('principal')->group(function () {
     Route::post('/student/{id}/update', [AdminDashboardController::class, 'studentupdate'])->name('student.update')->middleware('role:principal');
 });
 // Routes for principal
+Route::post('/fetch-teachers', [AdminDashboardController::class, 'fetchTeachers'])->name('fetch.teachers');
 
 Route::prefix('teacher')->group(function () {
     Route::get('/student_registration', [TeacherDashboardController::class, 'student_registration_page'])->name('teacher.student.registrations')->middleware('role:teacher');

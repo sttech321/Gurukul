@@ -83,13 +83,8 @@
                     <!-- Select gurukul -->
                     <div class="mb-3 center">
                     <!-- <span class="text-danger" id="gurukulid-error"></span> -->
-                        <select id="gurukulid" name="gurukulid" class="form-select form-control">
-                            <option value="">Select Gurukul</option> 
-                            @foreach($gurukuls as $gurukul)
-                                <option value="{{ $gurukul->id }}">{{ $gurukul->gurukul_name  }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+                    <input type="hidden" id="gurukulid" name="gurukulid" value="{{ $gurukuls ? $gurukuls->id : '' }}" class="form-control">
+
                     <!-- select class -->
                     <div class="mb-3 center">
                         <!-- <span class="text-danger" id="gurukulclass-error"></span> -->
@@ -179,15 +174,7 @@
             <form id="studentforms" action="{{ route('student.store') }}" method="POST" class="form-control mx-auto mt-3 w-75">
                 @csrf
                 <!-- select gurukul -->
-                <div class="mb-3 center">
-                    <select id="gurukulid" name="gurukulid" class="form-select form-control">
-                        <option value="">Select Gurukul</option>
-                        @foreach($gurukuls as $gurukul)
-                            <option value="{{ $gurukul->id }}">{{ $gurukul->gurukul_name  }}</option> 
-                        @endforeach
-                    </select>
-                </div>
-
+                <input type="hidden" id="gurukulid" name="gurukulid" value="{{ $gurukuls ? $gurukuls->id : '' }}" class="form-control">
                     <!-- select class -->
                     <div class="mb-3 center">
                         <select id="gurukulclass" name="std_class" class="form-select form-control">

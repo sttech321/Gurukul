@@ -12,7 +12,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('teacher_registration', function (Blueprint $table) {
-            $table->integer('gurukulid')->after('modern_education_qualifications'); // New field
+            $table->integer('gurukulid')->nullable()->after('modern_education_qualifications'); // New field
         });
     }
     

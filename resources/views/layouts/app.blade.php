@@ -76,7 +76,12 @@
         });
     </script>
 
-
+    <script>
+        // Add the 'mini' class to the body on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.classList.add('dsfsfgjh');
+        });
+    </script>
 </body>
 
 </html>

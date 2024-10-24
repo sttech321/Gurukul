@@ -77,15 +77,12 @@
             <h1 class="text-center" id="form-title">Teacher Registration</h1>
             <a class="close" href="#">&times;</a>
             <div class="content">
-                <form action="{{ route('teacher.registration.store') }}" method="POST" class="form-control w-75 mx-auto mt-3">
+                <form action="{{ route('teacher.registration.stores') }}" method="POST" class="form-control w-75 mx-auto mt-3">
                     @csrf
                     <div class="mb-3 center">
-                    <select id="gurukulid" name="gurukulid" class="form-select form-control">
-                        <option value="">Select Gurukul</option> <!-- Placeholder option -->
-                        @foreach($gurukuls as $gurukul)
-                            <option value="{{ $gurukul->id }}">{{ $gurukul->gurukul_name }}</option>
-                        @endforeach
-                    </select>
+                    
+                    <input type="hidden" id="gurukulid" name="gurukulid" value="{{ $gurukuls ? $gurukuls->id : '' }}" class="form-control">
+
                     </div>
                     <div class="mb-3 center">
                         <!-- <label for="name">Name:</label> -->
@@ -95,6 +92,19 @@
                         <!-- <label for="father_name">Father's Name:</label> -->
                         <input type="text" id="father_name" name="father_name" placeholder="Father's Name" required class="form-control">
                     </div>
+                    <div class="col-12 col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="email" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="password " class="form-control" required>
+                        </div>
+                    </div>
+                    <input type="hidden" class="form-control" id="role" name="role" placeholder="role " class="form-control" required>
                     <div class="mb-3 center">
                         <!-- <label for="mother_name">Mother's Name:</label> -->
                         <input type="text" id="mother_name" name="mother_name" placeholder="Mother's Name" required class="form-control">
@@ -161,17 +171,13 @@
         <h1 class="text-center" id="form-title">Teacher Registration Page</h1>
         <a class="close" href="#">&times;</a>
         <div class="content">
-            <form id="teacherform" action="{{ route('teacher.registration.store') }}" method="POST" class="form-control mt-3 w-75 mx-auto">
+            <form id="teacherform" action="{{ route('teacher.registration.stores') }}" method="POST" class="form-control mt-3 w-75 mx-auto">
                 @csrf
                 <!-- Gurukul name -->
                 <div class="mb-3 center">
                     <!-- <label for="type_of_setup" class="form-label">Type of Setup</label> -->
-                    <select id="gurukulid" name="gurukulid" class="form-select form-control">
-                        <option value="">Select Gurukul</option> <!-- Optional placeholder option -->
-                        @foreach($gurukuls as $gurukul)
-                            <option value="{{ $gurukul->id }}">{{ $gurukul->gurukul_name  }}</option> <!-- Replace 'id' with the actual field you want to use as value -->
-                        @endforeach
-                    </select>
+                    <input type="hidden" id="gurukulid" name="gurukulid" value="{{ $gurukuls ? $gurukuls->id : '' }}" class="form-control">
+
                 </div>
                 <div class="mb-3 center">
                     <!-- <label for="name">Name:</label> -->

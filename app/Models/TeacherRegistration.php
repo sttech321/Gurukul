@@ -15,6 +15,9 @@ class TeacherRegistration extends Model
     protected $fillable = [
         'gurukulid',
         'name',
+        'email',
+        'password',
+        'role',
         'father_name',
         'mother_name',
         'surname',

@@ -63,7 +63,7 @@
                         {{ $registration->trust_name }}
                     </td>
                     <td>
-                    <button type="button" class="btn btn-primary btn-md" data-bs-toggle="modal" data-bs-target="#popupRegistrationedit" onclick="editstudentform({{ $registration->id }})">
+                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#popupRegistrationedit" onclick="editstudentform({{ $registration->id }})">
                     {{ __('messages.edit') }}
                     </button>
                         <form action="{{ route('gurukul.destroy', $registration->id) }}" method="POST" style="display:inline;">

@@ -15,10 +15,11 @@ return new class extends Migration
             $table->bigIncrements('id')->startingValue(1001); 
             $table->string('First_name');
             $table->string('Last_name');
-            $table->string('Phone')->unique();
+            $table->string('mobile_number');
             $table->string('email')->unique();
             $table->string('address');
             $table->string('role');
+            $table->integer('common_id');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
