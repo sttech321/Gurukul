@@ -10,9 +10,10 @@
 .panel-info-wrap .innerPageContent .box {padding-top: 42px;padding-bottom: 26px;}
 .panel-info-wrap .table>:not(:last-child)>:last-child>* {border-bottom-color: #e3e3e3;}
 
-.panel-info-wrap .addressField{
-   max-width: 250px;
-   white-space: normal;
+.panel-info-wrap .addressField {
+    max-width: 250px;
+    white-space: normal;
+    min-width: 250px;
 }
 
 
