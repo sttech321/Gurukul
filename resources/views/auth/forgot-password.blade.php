@@ -1,25 +1,31 @@
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
-        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+@vite(['resources/css/bootstrap.min.css', 'resources/css/font-awesome.min.css', 'resources/css/common.css'])
+
+<!-- Session Status -->
+<x-auth-session-status class="mb-4" :status="session('status')" />
+
+<form method="POST" action="{{ route('password.email') }}">
+    @csrf
+
+    <!-- Email Address -->
+    <div class="wrapper sessionWrap">
+        <div class="contact-form-wrap">
+            <div class="FormTitleImage">Gurukul</div>
+            <div class="formField mb-4">
+                <label for="email" :value="__('Email')">Email</label>
+                <input id="email" class="block mt-1 w-full form-control" type="email" name="email" placeholder="Email" :value="old('email')" required autofocus />
+                @if ($errors->has('email'))
+                <div class="mt-2 text-start">
+                    {{ $errors->first('email') }}
+                </div>
+                @endif
+            </div>
+            <div class="buttons">
+                <button class="btn btnPrimary"> {{ __('Email Password Reset Link') }}</button>
+            </div>
+            <div class="heading-title">
+                <p>{{ __('Forgot your password? Provide your email for a reset link to choose a new one.') }}</p>
+            </div>
+
+        </div>
     </div>
-
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-
-    <form method="POST" action="{{ route('password.email') }}">
-        @csrf
-
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Email Password Reset Link') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+</form>

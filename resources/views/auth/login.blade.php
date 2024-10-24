@@ -1,4 +1,4 @@
-@vite(['resources/css/app.css', 'resources/css/bootstrap.min.css', 'resources/css/pages.css', 'resources/css/sidebar.css', 'resources/css/font-awesome.min.css', 'resources/css/common.css'])<!-- Session Status -->
+@vite(['resources/css/bootstrap.min.css', 'resources/css/font-awesome.min.css', 'resources/css/common.css'])
 <x-auth-session-status class="mb-4" :status="session('status')" />
 
 <form method="POST" action="{{ route('login') }}">
@@ -13,7 +13,11 @@
             <div class="formField">
                 <label for="email" :value="__('Email')">Email</label>
                 <input id="email" class="block mt-1 w-full font-control" type="email" name="email" placeholder="Email" :value="old('email')" required autofocus autocomplete="username" />
-                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                @if ($errors->has('email'))
+                <div class="mt-2 text-start text-danger">
+                    {{ $errors->first('email') }}
+                </div>
+                @endif
             </div>
             <div class="formField">
                 <label for="password" :value="__('Password')"> Password </label>
@@ -21,7 +25,7 @@
                     type="password"
                     name="password"
                     required autocomplete="current-password" />
-                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                <!-- <x-input-error :messages="$errors->get('password')" class="mt-2" /> -->
             </div>
             <div class="flexBetween mb-4 mt-3">
                 <div class="form-check rememberMeText">
