@@ -1,64 +1,64 @@
 @extends('layouts.admin.sidebar')
 
 @section('content')
-<div class="container mx-auto p-6">
-    <div class="box">
+<div class="innerPageWrapper">
+    <div class="box mb-4">
         <a class="btn btn-primary" href="#popup1" onclick="openPopup('add')">Add new teacher</a>
     </div>
-       <!-- Teacher List Table -->
-   <h1 class="text-center">Teacher Registration</h1><br>
+    <!-- Teacher List Table -->
+    <!-- <h1 class="text-center">Teacher Registration</h1><br> -->
     @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
     @endif
 
     @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
     @endif
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table class="table table-striped">
-            <thead class="">
+    <div class="panel-info-wrap">
+        <table class="table table-responsive panel-table">
+            <thead class="panel-heading">
                 <tr>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col">
                         Teacher Name
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col">
                         Branch
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col">
                         Guru Name
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col">
                         Mobile Number
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col">
                         Action
                     </th>
                 </tr>
             </thead>
             <tbody>
-            @foreach($teacher as $registration)
+                @foreach($teacher as $registration)
                 <tr class="">
-                    <td class="px-6 py-4">
-                    {{ $registration->name }}
+                    <td>
+                        {{ $registration->name }}
                     </td>
-                    <td class="px-6 py-4">
-                    {{ $registration->ved_shakha }}
+                    <td>
+                        {{ $registration->ved_shakha }}
                     </td>
-                    <td class="px-6 py-4">
-                    {{ $registration->guru_name }}
+                    <td>
+                        {{ $registration->guru_name }}
                     </td>
-                    <td class="px-6 py-4">
-                    {{ $registration->mobile_number }}
+                    <td>
+                        {{ $registration->mobile_number }}
                     </td>
-                    <td class="px-6 py-4">
+                    <td>
                         <a href="#popup2" class="edit-gurukul btn btn-primary" onclick="editstudentform({{ $registration->id }})">Edit</a>
                         <form action="{{ route('teacher.destroyAdmin', $registration->id) }}" method="POST" style="display:inline;">
                             @csrf
@@ -75,24 +75,24 @@
 
     <div id="popup1" class="overlay">
         <div class="popup">
-            <h1 class="text-center" id="form-title">Teacher Registration</h1>
+            <!-- <h1 class="text-center" id="form-title">Teacher Registration</h1> -->
             <a class="close" href="#">&times;</a>
             <div class="content">
                 <form action="{{ route('teacher.registration.storeAdmin') }}" method="POST" class="form-control w-75 mx-auto mt-3">
                     @csrf
                     <div class="mb-3 center">
-                    <select id="gurukulid" name="gurukulid" class="form-select form-control">
-                        <option value="">Select Gurukul</option> <!-- Placeholder option -->
-                        @foreach($gurukuls as $gurukul)
+                        <select id="gurukulid" name="gurukulid" class="form-select form-control">
+                            <option value="">Select Gurukul</option> <!-- Placeholder option -->
+                            @foreach($gurukuls as $gurukul)
                             <option value="{{ $gurukul->id }}">{{ $gurukul->gurukul_name }}</option>
-                        @endforeach
-                    </select>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="mb-3 center">
                         <!-- <label for="name">Name:</label> -->
                         <input type="text" id="name" name="name" placeholder="name" required class="form-control">
                     </div>
-                    <div class="mb-3 center">       
+                    <div class="mb-3 center">
                         <!-- <label for="father_name">Father's Name:</label> -->
                         <input type="text" id="father_name" name="father_name" placeholder="Father's Name" required class="form-control">
                     </div>
@@ -108,48 +108,48 @@
                         <!-- <label for="date_of_birth">Date of Birth:</label> -->
                         <input type="date" id="date_of_birth" name="date_of_birth" placeholder="DOB" required class="form-control">
                     </div>
-                    <div class="mb-3 center"> 
+                    <div class="mb-3 center">
                         <!-- <label for="gotra">Gotra:</label> -->
                         <input type="text" id="gotra" name="gotra" placeholder="Gotra" class="form-control">
                     </div>
-                    <div class="mb-3 center"> 
+                    <div class="mb-3 center">
                         <!-- <label for="varna">Varna:</label> -->
                         <input type="text" id="varna" name="varna" placeholder="Varna" class="form-control">
                     </div>
-                    <div class="mb-3 center"> 
+                    <div class="mb-3 center">
                         <!-- <label for="aadhaar_card">Aadhaar Card:</label> -->
                         <input type="text" id="aadhaar_card" name="aadhaar_card" placeholder="Aadhaar Card" required class="form-control">
                     </div>
-                    <div class="mb-3 center"> 
+                    <div class="mb-3 center">
                         <!-- <label for="home_address">Home Address:</label> -->
                         <textarea id="home_address" name="home_address" placeholder="home_address" required class="form-control"></textarea>
                     </div>
-                        <div class="mb-3 center"> 
+                    <div class="mb-3 center">
                         <!-- <label for="mobile_number">Mobile Number:</label> -->
                         <input type="text" id="mobile_number" name="mobile_number" placeholder="Mobile Number" required class="form-control">
                     </div>
-                    <div class="mb-3 center"> 
+                    <div class="mb-3 center">
                         <!-- <label for="guru_name">Guru Name:</label> -->
                         <input type="text" id="guru_name" name="guru_name" placeholder="Guru Name" class="form-control">
                     </div>
-                    <div class="mb-3 center"> 
+                    <div class="mb-3 center">
                         <!-- <label for="ved_shakha">Ved Shakha/Pravar:</label> -->
                         <input type="text" id="ved_shakha" name="ved_shakha" placeholder="Ved Shakha/Pravar" class="form-control">
                     </div>
-                    <div class="mb-3 center"> 
+                    <div class="mb-3 center">
                         <!-- <label for="extra_ordinary_skills">Extra Ordinary Skills:</label> -->
                         <textarea id="extra_ordinary_skills" name="extra_ordinary_skills" placeholder="Extra Ordinary Skills" class="form-control"></textarea>
                     </div>
-                    <div class="mb-3 center"> 
+                    <div class="mb-3 center">
                         <!-- <label for="exceptional_abilities">Exceptional Abilities/Skills:</label> -->
                         <textarea id="exceptional_abilities" name="exceptional_abilities" placeholder="Exceptional Abilities/Skills" class="form-control"></textarea>
                     </div>
-                    <div class="mb-3 center"> 
+                    <div class="mb-3 center">
                         <!-- <label for="modern_education_qualifications">Modern Education Qualifications:</label> -->
                         <textarea id="modern_education_qualifications" name="modern_education_qualifications" placeholder="modern_education_qualifications" class="form-control"></textarea>
                     </div>
                     <!-- <div class="mb-3 center">  -->
-                        <button type="submit" class="btn btn-primary center form-control w-50 mx-auto d-block">Submit</button>
+                    <button type="submit" class="btn btn-primary center form-control w-50 mx-auto d-block">Submit</button>
                     <!-- </div> -->
                 </form>
             </div>
@@ -170,16 +170,16 @@
                     <select id="gurukulid" name="gurukulid" class="form-select form-control">
                         <option value="">Select Gurukul</option> <!-- Optional placeholder option -->
                         @foreach($gurukuls as $gurukul)
-                            <option value="{{ $gurukul->id }}">{{ $gurukul->gurukul_name }}</option> <!-- Replace 'id' with the actual field you want to use as value -->
+                        <option value="{{ $gurukul->id }}">{{ $gurukul->gurukul_name  }}</option> <!-- Replace 'id' with the actual field you want to use as value -->
                         @endforeach
                     </select>
                 </div>
                 <div class="mb-3 center">
                     <!-- <label for="name">Name:</label> -->
-                     <input type="hidden" id="formid" value="">
+                    <input type="hidden" id="formid" value="">
                     <input type="text" id="name" name="name" placeholder="name" required class="form-control">
                 </div>
-                <div class="mb-3 center">       
+                <div class="mb-3 center">
                     <!-- <label for="father_name">Father's Name:</label> -->
                     <input type="text" id="father_name" name="father_name" placeholder="Father's Name" required class="form-control">
                 </div>
@@ -195,48 +195,48 @@
                     <!-- <label for="date_of_birth">Date of Birth:</label> -->
                     <input type="date" id="date_of_birth" name="date_of_birth" placeholder="DOB" required class="form-control">
                 </div>
-                <div class="mb-3 center"> 
+                <div class="mb-3 center">
                     <!-- <label for="gotra">Gotra:</label> -->
                     <input type="text" id="gotra" name="gotra" placeholder="Gotra" class="form-control">
                 </div>
-                <div class="mb-3 center"> 
+                <div class="mb-3 center">
                     <!-- <label for="varna">Varna:</label> -->
                     <input type="text" id="varna" name="varna" placeholder="Varna" class="form-control">
                 </div>
-                <div class="mb-3 center"> 
+                <div class="mb-3 center">
                     <!-- <label for="aadhaar_card">Aadhaar Card:</label> -->
                     <input type="text" id="aadhaar_card" name="aadhaar_card" placeholder="Aadhaar Card" required class="form-control">
                 </div>
-                <div class="mb-3 center"> 
+                <div class="mb-3 center">
                     <!-- <label for="home_address">Home Address:</label> -->
                     <textarea id="home_address" name="home_address" placeholder="home_address" required class="form-control"></textarea>
                 </div>
-                    <div class="mb-3 center"> 
+                <div class="mb-3 center">
                     <!-- <label for="mobile_number">Mobile Number:</label> -->
                     <input type="text" id="mobile_number" name="mobile_number" placeholder="Mobile Number" required class="form-control">
                 </div>
-                <div class="mb-3 center"> 
+                <div class="mb-3 center">
                     <!-- <label for="guru_name">Guru Name:</label> -->
                     <input type="text" id="guru_name" name="guru_name" placeholder="Guru Name" class="form-control">
                 </div>
-                <div class="mb-3 center"> 
+                <div class="mb-3 center">
                     <!-- <label for="ved_shakha">Ved Shakha/Pravar:</label> -->
                     <input type="text" id="ved_shakha" name="ved_shakha" placeholder="Ved Shakha/Pravar" class="form-control">
                 </div>
-                <div class="mb-3 center"> 
+                <div class="mb-3 center">
                     <!-- <label for="extra_ordinary_skills">Extra Ordinary Skills:</label> -->
                     <textarea id="extra_ordinary_skills" name="extra_ordinary_skills" placeholder="Extra Ordinary Skills" class="form-control"></textarea>
                 </div>
-                <div class="mb-3 center"> 
+                <div class="mb-3 center">
                     <!-- <label for="exceptional_abilities">Exceptional Abilities/Skills:</label> -->
                     <textarea id="exceptional_abilities" name="exceptional_abilities" placeholder="Exceptional Abilities/Skills" class="form-control"></textarea>
                 </div>
-                <div class="mb-3 center"> 
+                <div class="mb-3 center">
                     <!-- <label for="modern_education_qualifications">Modern Education Qualifications:</label> -->
                     <textarea id="modern_education_qualifications" name="modern_education_qualifications" placeholder="modern_education_qualifications" class="form-control"></textarea>
                 </div>
                 <!-- <div class="mb-3 center">  -->
-                    <button type="submit" class="btn btn-primary center form-control mx-auto d-block w-50">Update</button>
+                <button type="submit" class="btn btn-primary center form-control mx-auto d-block w-50">Update</button>
                 <!-- </div> -->
             </form>
         </div>
@@ -274,8 +274,8 @@ function editstudentform(gurukulId) {
 
             form.action = `/admin/teacher/${gurukulId}/update`; 
 
-        })
-        .catch(error => console.error('Error fetching data:', error));
-}
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    }
 </script>
 @endsection

@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Laravel') }}</title>
     <!-- Fonts -->
-    @vite(['resources/css/app.css', 'resources/css/bootstrap.min.css', 'resources/css/font-awesome.min.css', 'resources/css/common.css'])
+    @vite(['resources/css/app.css', 'resources/css/bootstrap.min.css', 'resources/css/pages.css', 'resources/css/sidebar.css', 'resources/css/font-awesome.min.css', 'resources/css/common.css'])
 </head>
 
 <body class="font-sans antialiased">
@@ -60,6 +60,23 @@
             });
         });
     </script>
+
+    <!-- lang js code  -->
+
+    <script>
+        document.querySelector('.dropdown-toggle').addEventListener('click', function() {
+            const menu = document.querySelector('.dropdown-menu');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        });
+        window.addEventListener('click', function(event) {
+            const menu = document.querySelector('.dropdown-menu');
+            if (!event.target.matches('.dropdown-toggle') && menu.style.display === 'block') {
+                menu.style.display = 'none';
+            }
+        });
+    </script>
+
+
 </body>
 
 </html>
