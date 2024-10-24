@@ -14,7 +14,7 @@
                 <label for="email" :value="__('Email')">Email</label>
                 <input id="email" class="block mt-1 w-full form-control" type="email" name="email" placeholder="Email" :value="old('email')" required autofocus />
                 @if ($errors->has('email'))
-                <div class="mt-2 text-start">
+                <div class="mt-2 text-start text-danger">
                     {{ $errors->first('email') }}
                 </div>
                 @endif
