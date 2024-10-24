@@ -3,8 +3,9 @@
 @section('content')
 <div class="innerPageWrapper">
     <div class="box mb-4">
-        <a class="btn btn-primary" href="#popup1" onclick="openPopup('add')">Add new Student</a>
+        <a class="btn btn-primary" href="#popup1" onclick="openPopup('add')"> {{ __('messages.add_new_student') }}</a>
     </div>
+
     <!-- Teacher List Table -->
     <!-- <h1 class="text-center">Student Registration</h1><br> -->
     @if(session('success'))
