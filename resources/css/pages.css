@@ -4,6 +4,64 @@
 .panel-info-wrap th {color: #727272;padding: 14px 20px;font-weight: 500;}
 .panel-info-wrap td{padding: 8px 20px;vertical-align: middle;text-transform: capitalize;}
 .panel-info-wrap table{margin:0;}
+.panel-info-wrap table th,
+.panel-info-wrap table td{white-space: nowrap;}
 .panel-info-wrap .table>:not(caption)>*>* {background-color: #b96e6e00;}
 .panel-info-wrap .innerPageContent .box {padding-top: 42px;padding-bottom: 26px;}
 .panel-info-wrap .table>:not(:last-child)>:last-child>* {border-bottom-color: #e3e3e3;}
+
+.panel-info-wrap .addressField{
+   max-width: 250px;
+   white-space: normal;
+}
+
+
+
+/*------------profile-page-css---------*/
+.profilePageWrap .profileSection {
+   border: 1px solid #e7e7e7;
+   padding: 28px;
+   height: 100%;
+   border-radius: 10px;
+}
+.profilePageWrap .secTitle{margin-bottom: 20px;}
+/* .profilePageWrap .profileSection form {max-width: 500px;} */
+
+.profilePageWrap .profileSection input{
+   padding: .8rem 1.3rem;
+   border-radius: 100px;
+}
+.profilePageWrap .profileSection .btn{
+   width: 200px;
+   border-radius: 100px;
+   padding: 10px;
+}
+.profilePageContent {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0px -10px;
+}
+.profilePageContent .profileBox {
+    max-width: 50%;
+    width: 50%;
+    padding: 0px 10px;
+    margin-bottom: 20px;
+}
+
+
+@media (max-width:767px){
+   .profilePageContent .profileBox {
+      max-width: 100%;
+      width: 100%;
+      padding: 0px 10px;
+      margin-bottom: 20px;
+   }
+   body .page-wrapper .page-content .sidebarRightContentWrap {
+      padding: 30px 20px;
+   }
+   .profilePageWrap .profileSection .formField{
+      margin-bottom: 1rem !important;
+   }
+}
+
+/*-------------Css-Closed----------------*/

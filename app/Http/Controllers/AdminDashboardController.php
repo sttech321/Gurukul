@@ -10,7 +10,7 @@ use App\Models\BookIssue;
 use App\Models\GurukulRegistration;
 use App\Models\TeacherRegistration;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth; 
+use Illuminate\Support\Facades\Auth;
 
 class AdminDashboardController extends Controller
 {
@@ -18,7 +18,7 @@ class AdminDashboardController extends Controller
     public function index()
     {
         $title = 'dashboard';
-        return view('dashboard/admin',compact('title'));
+        return view('dashboard/admin', compact('title'));
     }
 
     // Store gurukul registration page form data
@@ -32,7 +32,7 @@ class AdminDashboardController extends Controller
             'email' => 'required|email|max:255',
             'password' => 'required|string|min:8',
         ]);
-    
+
         // Create Gurukul registration record
         GurukulRegistration::create([
             'gurukul_name' => $request->gurukul_name,
@@ -64,7 +64,7 @@ class AdminDashboardController extends Controller
             'password' => bcrypt($request->password), // Ensure to hash the password
             'address' => $request->address,
         ]);
-    
+
         // Redirect back with success message
         return redirect()->back()->with('success', 'Gurukul Registration successfully submitted!');
     }
@@ -75,7 +75,7 @@ class AdminDashboardController extends Controller
         $title = 'Gurukul Registration';
         $paginationLimit = env('PAGINATION_LIMIT');
         $gurukuls = GurukulRegistration::paginate($paginationLimit);
-        return view('layouts/admin/gurukul_registration_page',compact('gurukuls','title'));
+        return view('layouts/admin/gurukul_registration_page', compact('gurukuls', 'title'));
     }
 
     // edit the gurukul registration form data
@@ -92,12 +92,12 @@ class AdminDashboardController extends Controller
             'gurukul_name' => 'required|string|max:255',
             // Other validation rules...
         ]);
-    
+
         $registration = GurukulRegistration::findOrFail($id);
-    
+
         // Convert registered_with_education_board to 1 or 0
         $registeredWithEducationBoard = $request->registered_with_education_board === 'Yes' ? 1 : 0;
-    
+
         // Update the registration record
         $registration->update([
             'gurukul_name' => $request->gurukul_name,
@@ -116,7 +116,7 @@ class AdminDashboardController extends Controller
             'education_board_name' => $request->registered_with_education_board === 'Yes' ? $request->education_board_name : null, // Store if registered
             'facilities' => implode(', ', $request->facilities),
         ]);
-    
+
         return redirect()->back()->with('success', 'Gurukul Registration updated successfully.');
     }
 
@@ -142,10 +142,10 @@ class AdminDashboardController extends Controller
     public function teacher_registration()
     {
         $title = 'Teacher Registration';
-        $paginationLimit = env('PAGINATION_LIMIT',10);
+        $paginationLimit = env('PAGINATION_LIMIT', 10);
         $gurukuls = GurukulRegistration::all();
         $teacher = TeacherRegistration::paginate($paginationLimit);
-        return view('layouts.admin.teacher_registration', compact('teacher', 'gurukuls','title'));
+        return view('layouts.admin.teacher_registration', compact('teacher', 'gurukuls', 'title'));
     }
 
     // Update the teacher registration form data
@@ -170,10 +170,10 @@ class AdminDashboardController extends Controller
             'exceptional_abilities' => 'nullable|string|max:500',
             'modern_education_qualifications' => 'nullable|string|max:500'
         ]);
-    
+
         // Find the teacher record by ID
         $teacher = TeacherRegistration::findOrFail($id);
-    
+
         // Update the teacher record
         $teacher->update([
             'gurukulid' => $validatedData['gurukulid'],
@@ -193,11 +193,11 @@ class AdminDashboardController extends Controller
             'exceptional_abilities' => $validatedData['exceptional_abilities'],
             'modern_education_qualifications' => $validatedData['modern_education_qualifications']
         ]);
-    
+
         // Redirect back with success message
         return redirect()->back()->with('success', 'Teacher Registration updated successfully.');
     }
-    
+
     // edit the teacher registration form data
     public function teacheredit($id)
     {
@@ -255,13 +255,13 @@ class AdminDashboardController extends Controller
 
     // view page of the student registration
     public function student_registration()
-    {   
+    {
         $title = 'Student Registration';
-        $paginationLimit = env('PAGINATION_LIMIT',10);
+        $paginationLimit = env('PAGINATION_LIMIT', 10);
         $Add_student_class = Add_student_class::all();
         $gurukuls = GurukulRegistration::all();
         $student = StudentRegistration::paginate($paginationLimit);
-        return view('layouts/admin/student_registration',compact('student','gurukuls','Add_student_class','title'));
+        return view('layouts/admin/student_registration', compact('student', 'gurukuls', 'Add_student_class', 'title'));
     }
 
     // edit the student form data
@@ -270,7 +270,7 @@ class AdminDashboardController extends Controller
         $registration = StudentRegistration::findOrFail($id);
         return response()->json($registration);
     }
-    
+
     // Delete the student Registration
     public function destroystudenttable($id)
     {
@@ -281,7 +281,8 @@ class AdminDashboardController extends Controller
     }
 
     // Update the student form data
-    public function studentupdate(Request $request, $id){
+    public function studentupdate(Request $request, $id)
+    {
         $validatedData = $request->validate([
             'gurukulid' => 'required',
             'std_class' => 'required',
@@ -304,7 +305,7 @@ class AdminDashboardController extends Controller
         ]);
 
         $student = StudentRegistration::findOrFail($id);
-        
+
 
         $student->update([
             'gurukulid' => $validatedData['gurukulid'],
@@ -338,7 +339,7 @@ class AdminDashboardController extends Controller
             'gurukulid' => 'required',
             'std_class' => 'required',
             'name' => 'required|string|max:255',
-            'email' => 'required',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required',
             'father_name' => 'required|string|max:255',
             'mother_name' => 'required|string|max:255',
@@ -399,7 +400,7 @@ class AdminDashboardController extends Controller
     // View the new class page
     public function showStdClass()
     {
-        $paginationLimit = env('PAGINATION_LIMIT',10);
+        $paginationLimit = env('PAGINATION_LIMIT', 10);
         // Fetch data from the database if needed
         $std_class = Add_student_class::paginate($paginationLimit); // Example: Fetch all standard classes
         // Return the view with the data
@@ -412,17 +413,18 @@ class AdminDashboardController extends Controller
         $request->validate([
             'std_classes' => 'required|unique:add_student_classes,std_classes', // Ensure it's unique
         ]);
-    
+
         // Store new class
         Add_student_class::create([
             'std_classes' => $request->std_classes,
         ]);
-    
+
         return redirect()->back()->with('success', 'Class added successfully!');
-    }    
+    }
 
     // Update the new class
-    public function updatenewclass(Request $request, $id){
+    public function updatenewclass(Request $request, $id)
+    {
         $validatedData = $request->validate([
             'std_classes' => 'required|unique:add_student_classes,std_classes',
         ]);
@@ -451,7 +453,7 @@ class AdminDashboardController extends Controller
         return response()->json($registration);
     }
     // Add new class fucntionality end here
-    
+
     // Store inventory registration page form data
     // public function inventory_management()
     // {   

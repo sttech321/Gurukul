@@ -14,7 +14,7 @@
     <div class="min-h-screen bg-gray-100 dark:bg-900">
         <main class="page-wrapper chiller-theme toggled">
             <div class="page-content">
-            @include('layouts.navigation')
+                @include('layouts.navigation')
                 <div class="sidebarRightContentWrap">
                     <div class="flex-grow">
                         <!-- Page Heading -->
@@ -75,7 +75,80 @@
             }
         });
     </script>
+    <!-- <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.classList.add('profilePage');
+        });
+    </script> -->
+    <script>
+        function updatePadding() {
+            const mediaQuery = window.matchMedia('(max-width: 1460px)');
+            const pageContent = document.querySelector('.page-wrapper.toggled .page-content');
 
+            if (pageContent) {
+                if (mediaQuery.matches) {
+
+                    pageContent.style.paddingLeft = '0';
+                } else {
+
+                    pageContent.style.paddingLeft = '';
+                }
+            }
+
+        }
+
+
+        updatePadding();
+        window.addEventListener('resize', updatePadding);
+    </script>
+    <script>
+        function updateStyles() {
+            const mediaQuery = window.matchMedia('(max-width: 1024px)');
+            const pageContent = document.querySelector('.page-wrapper.toggled .page-content');
+            const pageWrapper = document.querySelector('.page-wrapper');
+
+            if (pageContent && pageWrapper) {
+                if (mediaQuery.matches) {
+                    // If viewport width is below 1460px, remove 'toggled' class and set padding-left to 0
+                    pageContent.style.paddingLeft = '0';
+                    pageWrapper.classList.remove('toggled');
+                } else {
+                    // If viewport width is 1460px or above, reset padding-left and ensure 'toggled' class is present
+                    pageContent.style.paddingLeft = '';
+                    pageWrapper.classList.add('toggled');
+                }
+            }
+        }
+
+        // Initial check on page load
+        window.addEventListener('load', updateStyles);
+
+        // Add event listener to handle changes in viewport width
+        window.addEventListener('resize', updateStyles);
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var dropdownToggle = document.querySelector('.dropdown-toggle');
+
+            if (dropdownToggle) { // Check if the element exists
+                dropdownToggle.addEventListener('click', function() {
+                    this.parentElement.classList.toggle('show');
+                });
+            }
+
+            window.addEventListener('click', function(event) {
+                if (!event.target.matches('.dropdown-toggle')) {
+                    var dropdowns = document.getElementsByClassName("dropdown");
+                    for (var i = 0; i < dropdowns.length; i++) {
+                        var openDropdown = dropdowns[i];
+                        if (openDropdown.classList.contains('show')) {
+                            openDropdown.classList.remove('show');
+                        }
+                    }
+                }
+            });
+        });
+    </script>
 
 </body>
 

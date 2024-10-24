@@ -3,7 +3,9 @@
 @section('content')
 <div class="innerPageWrapper">
     <div class="box mb-4">
-        <a class="btn btn-primary" href="#popup1" onclick="('add')">Add class</a>
+        <button type="button" class="btn btn-primary btn-md" data-bs-toggle="modal" data-bs-target="#addPopupRegistration">
+            Add class
+        </button>
     </div>
     <!-- Gurukul List Table -->
     <!-- <h1 class="text-center">Add New class</h1> -->
@@ -23,8 +25,8 @@
     </div>
     @endif
 
-    <div class="panel-info-wrap">
-        <table class="table table-responsive panel-table">
+    <div class="panel-info-wrap table-responsive">
+        <table class="table panel-table">
             <thead class="">
                 <tr>
                     <th scope="col">
@@ -48,11 +50,13 @@
                         {{ $registration->std_classes }}
                     </td>
                     <td>
-                        <a href="#popup2" class="edit-gurukul btn btn-primary" onclick="editstudentform({{ $registration->id }})">Edit</a>
+                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" onclick="editstudentform({{ $registration->id }})" data-bs-target="#addPopupRegistration2">
+                            Edit
+                        </button>
                         <form action="{{ route('class.delete', $registration->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                         </form>
                     </td>
                 </tr>
@@ -61,46 +65,69 @@
         </table>
     </div>
 
-    <div id="popup1" class="overlay">
-        <div class="popup">
-            <h1 class="text-center" id="form-title">Add New Class Page</h1>
-            <a class="close mb-3" href="#">&times;</a>
-            <div class="content">
-                <form id="addnewclass" action="{{ route('class.create') }}" method="POST" class="gurukul registration row g-3 mt-3 form-control w-75 mx-auto">
-                    @csrf
-                    <!-- If Yes, Name of the Education Board -->
-                    <div class="mb-3 center">
-                        <label for="education_board_name" class="form-label">Add new class</label>
-                        <br>
-                        <input type="text" class="form-control" id="std_classes" name="std_classes" placeholder="std_classes" class="form-control">
+    <div class="modal fade addContentModal" id="addPopupRegistration" tabindex="-1" aria-labelledby="addPopupRegistrationLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add New Class Page</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="content">
+                        <form id="addnewclass" action="{{ route('class.create') }}" method="POST" class="gurukul registration-content">
+                            <div class="row">
+                                @csrf
+                                <div class="col-12 col-md-12">
+                                    <div class="mb-3">
+                                        <label class="form-label">Add new class</label>
+                                        <input type="text" class="form-control" id="std_classes" name="std_classes" placeholder="std_classes" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-12 text-center">
+                                    <div class="submitBtnWrap mt-3 mb-2">
+                                        <button type="submit" id="submit-button" class="btn btn-primary btn-md px-4">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-
-                    <button type="submit" id="submit-button" class="btn btn-primary center form-control w-50 mx-auto d-block">Submit</button>
-                </form>
+                </div>
             </div>
         </div>
     </div>
 
-    <div id="popup2" class="overlay">
-        <div class="popup">
-            <h1 class="text-center" id="form-title">Add New Class Page</h1>
-            <a class="close mb-3" href="#">&times;</a>
-            <div class="content">
-                <form id="addnewclasss" action="{{ route('class.create') }}" method="POST" class="gurukul registration row g-3 mt-3 form-control w-75 mx-auto">
-                    @csrf
-                    <!-- If Yes, Name of the Education Board -->
-                    <div class="mb-3 center">
-                        <label for="education_board_name" class="form-label">Add new class</label>
-                        <br>
-                        <input type="hidden" id="gurukul_ids" name="gurukul_id" value="">
-                        <input type="text" class="form-control" id="std_classes" name="std_classes" placeholder="std_classes" class="form-control">
+    <div class="modal fade addContentModal" id="addPopupRegistration2" tabindex="-1" aria-labelledby="addPopupRegistration2Label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add New Class Page</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="content">
+                        <form id="addnewclasss" action="{{ route('class.create') }}" method="POST" class="gurukul registration-content">
+                            <div class="row">
+                                @csrf
+                                <div class="col-12 col-md-12">
+                                    <div class="mb-3">
+                                        <label class="form-label">Add new class</label>
+                                        <input type="hidden" id="gurukul_ids" name="gurukul_id" value="">
+                                        <input type="text" class="form-control" id="std_classes" name="std_classes" placeholder="std_classes" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-12 text-center">
+                                    <div class="submitBtnWrap mt-3 mb-2">
+                                        <button type="submit" id="submit-button" class="btn btn-primary btn-md px-4">Update</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-
-                    <button type="submit" id="submit-button" class="btn btn-primary center form-control w-50 mx-auto d-block">update</button>
-                </form>
+                </div>
             </div>
         </div>
     </div>
+
 </div>
 <script>
     function editstudentform(gurukulId) {
