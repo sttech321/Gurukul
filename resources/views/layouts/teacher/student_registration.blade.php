@@ -1,4 +1,4 @@
-@extends('layouts.principal.sidebar')
+@extends('layouts.teacher.sidebar')
 
 @section('content')
 <div class="container mx-auto p-6">
@@ -106,7 +106,7 @@
                         <span class="text-danger" id="name-error"></span>
                         <input type="text" id="name" name="name" placeholder="name" class="form-control" required><br>
                     </div>
-                    
+
                     <div class="mb-3 center">
                         <input type="email" class="form-control" id="email" name="email" placeholder="email" class="form-control" required>
                     </div>

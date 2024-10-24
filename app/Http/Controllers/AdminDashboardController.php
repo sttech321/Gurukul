@@ -17,7 +17,8 @@ class AdminDashboardController extends Controller
     // view page of the admin dashboard
     public function index()
     {
-        return view('dashboard/admin');
+        $title = 'dashboard';
+        return view('dashboard/admin',compact('title'));
     }
 
     // Store gurukul registration page form data
@@ -67,13 +68,14 @@ class AdminDashboardController extends Controller
         // Redirect back with success message
         return redirect()->back()->with('success', 'Gurukul Registration successfully submitted!');
     }
-    
 
     // view page of the gurukul registration
     public function gurukul_registration_page()
     {
-        $gurukuls = GurukulRegistration::paginate(5);
-        return view('layouts/admin/gurukul_registration_page',compact('gurukuls'));
+        $title = 'Gurukul Registration';
+        $paginationLimit = env('PAGINATION_LIMIT');
+        $gurukuls = GurukulRegistration::paginate($paginationLimit);
+        return view('layouts/admin/gurukul_registration_page',compact('gurukuls','title'));
     }
 
     // edit the gurukul registration form data
@@ -139,9 +141,11 @@ class AdminDashboardController extends Controller
     // view page of the teacher registration
     public function teacher_registration()
     {
-        $gurukuls = GurukulRegistration::paginate(5);
-        $teacher = TeacherRegistration::paginate(5);
-        return view('layouts.admin.teacher_registration', compact('teacher', 'gurukuls'));
+        $title = 'Teacher Registration';
+        $paginationLimit = env('PAGINATION_LIMIT',10);
+        $gurukuls = GurukulRegistration::all();
+        $teacher = TeacherRegistration::paginate($paginationLimit);
+        return view('layouts.admin.teacher_registration', compact('teacher', 'gurukuls','title'));
     }
 
     // Update the teacher registration form data
@@ -252,10 +256,12 @@ class AdminDashboardController extends Controller
     // view page of the student registration
     public function student_registration()
     {   
+        $title = 'Student Registration';
+        $paginationLimit = env('PAGINATION_LIMIT',10);
         $Add_student_class = Add_student_class::all();
         $gurukuls = GurukulRegistration::all();
-        $student = StudentRegistration::all();
-        return view('layouts/admin/student_registration',compact('student','gurukuls','Add_student_class'));
+        $student = StudentRegistration::paginate($paginationLimit);
+        return view('layouts/admin/student_registration',compact('student','gurukuls','Add_student_class','title'));
     }
 
     // edit the student form data
@@ -332,6 +338,8 @@ class AdminDashboardController extends Controller
             'gurukulid' => 'required',
             'std_class' => 'required',
             'name' => 'required|string|max:255',
+            'email' => 'required',
+            'password' => 'required',
             'father_name' => 'required|string|max:255',
             'mother_name' => 'required|string|max:255',
             'date_of_birth' => 'required|date',
@@ -353,6 +361,9 @@ class AdminDashboardController extends Controller
             'gurukulid' => $validatedData['gurukulid'],
             'std_class' => $validatedData['std_class'],
             'name' => $validatedData['name'],
+            'email' => $request->email,
+            'role' => 'teacher',
+            'password' => bcrypt($request->password),
             'father_name' => $validatedData['father_name'],
             'mother_name' => $validatedData['mother_name'],
             'date_of_birth' => $validatedData['date_of_birth'],
@@ -370,6 +381,16 @@ class AdminDashboardController extends Controller
             'mother_profession' => $validatedData['mother_profession'] ?? null,
         ]);
 
+        user::create([
+            'First_name' => $request->name,
+            'Last_name' => $request->name,
+            'Phone' => $request->father_mobile_number,
+            'email' => $request->email,
+            'role' => 'teacher',
+            'password' => bcrypt($request->password), // Ensure to hash the password
+            'address' => $request->home_address,
+        ]);
+
         // Redirect back with a success message
         return redirect()->back()->with('success', 'Student registration data stored successfully!');
     }
@@ -378,8 +399,9 @@ class AdminDashboardController extends Controller
     // View the new class page
     public function showStdClass()
     {
+        $paginationLimit = env('PAGINATION_LIMIT',10);
         // Fetch data from the database if needed
-        $std_class = Add_student_class::all(); // Example: Fetch all standard classes
+        $std_class = Add_student_class::paginate($paginationLimit); // Example: Fetch all standard classes
         // Return the view with the data
         return view('layouts/admin/add_class', compact('std_class'));
     }
@@ -431,59 +453,61 @@ class AdminDashboardController extends Controller
     // Add new class fucntionality end here
     
     // Store inventory registration page form data
-    public function inventory_management()
-    {
-        return view('layouts/admin/inventory_management');
-    }
+    // public function inventory_management()
+    // {   
+    //     $title = 'Inventory management';
+    //     return view('layouts/admin/inventory_management',compact('title'));
+    // }
 
     // view page of the library management
-    public function create()
-    {
-        $books = Book::all(); // Fetch all books for the dropdown
-        $users = StudentRegistration::all(); // Fetch all users for the dropdown
-        return view('layouts/admin/libraray_managementsystem', compact('books', 'users'));
-    }
+    // public function create()
+    // {
+    //     $title = 'Library management';
+    //     $books = Book::all(); // Fetch all books for the dropdown
+    //     $users = StudentRegistration::all(); // Fetch all users for the dropdown
+    //     return view('layouts/admin/libraray_managementsystem', compact('books', 'users','title'));
+    // }
 
     // store the library book data
-    public function storelibrarydata(Request $request)
-    {
-        // Validate form data
-        $request->validate([
-            'book_id' => 'required|exists:books,id',
-            'isbn' => 'required|string|max:13',
-            'user_id' => 'required|exists:users,id',
-            'issue_date' => 'required|date',
-            'expected_return' => 'required|date',
-            'return_date' => 'nullable|date',
-            'status' => 'required|in:issued,returned,overdue',
-        ]);
+    // public function storelibrarydata(Request $request)
+    // {
+    //     // Validate form data
+    //     $request->validate([
+    //         'book_id' => 'required|exists:books,id',
+    //         'isbn' => 'required|string|max:13',
+    //         'user_id' => 'required|exists:users,id',
+    //         'issue_date' => 'required|date',
+    //         'expected_return' => 'required|date',
+    //         'return_date' => 'nullable|date',
+    //         'status' => 'required|in:issued,returned,overdue',
+    //     ]);
 
-        // Store new book issue
-        BookIssue::create([
-            'book_id' => $request->book_id,
-            'isbn' => $request->isbn,
-            'user_id' => $request->user_id,
-            'issue_date' => $request->issue_date,
-            'expected_return' => $request->expected_return,
-            'return_date' => $request->return_date,
-            'status' => $request->status,
-        ]);
+    //     // Store new book issue
+    //     BookIssue::create([
+    //         'book_id' => $request->book_id,
+    //         'isbn' => $request->isbn,
+    //         'user_id' => $request->user_id,
+    //         'issue_date' => $request->issue_date,
+    //         'expected_return' => $request->expected_return,
+    //         'return_date' => $request->return_date,
+    //         'status' => $request->status,
+    //     ]);
 
-        return redirect()->back()->with('success', 'Book issued successfully!');
-    }
+    //     return redirect()->back()->with('success', 'Book issued successfully!');
+    // }
 
     // store the new book
-    public function storebookdata(Request $request)
-    {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'isbn' => 'required|string|max:255|unique:books',
-            'author' => 'required|string|max:255',
-            'published_at' => 'required|date',
-        ]);
+    // public function storebookdata(Request $request)
+    // {
+    //     $request->validate([
+    //         'title' => 'required|string|max:255',
+    //         'isbn' => 'required|string|max:255|unique:books',
+    //         'author' => 'required|string|max:255',
+    //         'published_at' => 'required|date',
+    //     ]);
 
-        Book::create($request->all());
+    //     Book::create($request->all());
 
-        return redirect()->back()->with('success', 'Book added successfully.');
-    }
+    //     return redirect()->back()->with('success', 'Book added successfully.');
+    // }
 }

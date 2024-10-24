@@ -6,7 +6,6 @@
         <a class="btn btn-primary" href="#popup1" onclick="('add')">{{ __('messages.add_new_school') }}</a>
     </div>
    <!-- Gurukul List Table -->
-   <h1 class="text-center">{{ __('messages.gurukul_registration') }}</h1>
     @if(session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
@@ -110,7 +109,7 @@
                     </div>
 
                     <!-- role -->
-                        <input type="hidden" class="form-control" id="role" name="role" placeholder="role " class="form-control" required>
+                        <!-- <input type="hidden" class="form-control" id="role" name="role" placeholder="role " class="form-control" required> -->
 
                     <h3 class="center">Trust Information</h3>
 
@@ -238,7 +237,7 @@
 
 <div id="popup2" class="overlay">
     <div class="popup">
-        <h1 class="text-center" id="form-title">Gurukul Registration</h1>
+        <h1 class="text-center" id="form-title">  {{ $title }}</h1>
         <a class="close" href="#">&times;</a>
         <div class="content">
             <form id="gurukulForms" action="{{ route('gurukul.register') }}" method="POST" class="gurukul registration form-control mx-auto w-75 mt-3">

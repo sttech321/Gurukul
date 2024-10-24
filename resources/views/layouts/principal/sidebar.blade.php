@@ -76,7 +76,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="">
+						<a href="{{ route('student.registrations') }}">
 							<div class="imgIconWrap">
 								<img width="20" height="20" src="/images/teacher-registration.svg" alt="sidebar icon">
 							</div>

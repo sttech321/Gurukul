@@ -1,6 +1,5 @@
-@vite(['resources/css/app.css'])
+<!-- @vite(['resources/css/app.css']) -->
 <x-app-layout>
-
 	<a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
 		<i class="fas fa-bars"></i>
 	</a>
@@ -69,37 +68,13 @@
 			<div class="sidebar-menu">
 				<ul>
 					<li>
-						<a href="{{ route('gurukul.registration') }}">
-							<div class="imgIconWrap">
-								<img width="20" height="20" src="/images/registration.svg" alt="sidebar icon">
-							</div>
-							<span> Gurukul Registration </span>
-						</a>
-					</li>
-					<li>
-						<a href="{{ route('teacher.registration') }}">
-							<div class="imgIconWrap">
-								<img width="20" height="20" src="/images/student-registration.svg" alt="sidebar icon">
-							</div>
-							<span>Teacher Registration</span>
-						</a>
-					</li>
-					<li>
-						<a href="{{ route('student.registration') }}">
+						<a href="{{ route('teacher.student.registrations') }}">
 							<div class="imgIconWrap">
 								<img width="20" height="20" src="/images/teacher-registration.svg" alt="sidebar icon">
 							</div>
 							<span>Student Registration</span>
 						</a>
-					</li>
-          <li>
-						<a href="{{ route('add.class') }}">
-							<div class="imgIconWrap">
-								<img width="20" height="20" src="/images/teacher-registration.svg" alt="sidebar icon">
-							</div>
-							<span>Add class</span>
-						</a>
-					</li>				
+					</li>			
 				</ul>
 			</div>
 		</div>

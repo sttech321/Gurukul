@@ -61,7 +61,7 @@
                     </td>
                     <td class="px-6 py-4">
                         <a href="#popup2" class="edit-gurukul btn btn-primary" onclick="editstudentform({{ $registration->id }})">Edit</a>
-                        <form action="{{ route('student.destroy', $registration->id) }}" method="POST" style="display:inline;">
+                        <form action="{{ route('student.destroyAdmin', $registration->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Delete</button>
@@ -78,7 +78,7 @@
         <h3 class="text-center">Student Registration</h3>
             <a class="close" href="#">&times;</a>
             <div class="content">
-                <form id="studentform" action="{{ route('student.store') }}" method="POST" class="form-control mx-auto w-75 mt-3">
+                <form id="studentform" action="{{ route('student.storeAdmin') }}" method="POST" class="form-control mx-auto w-75 mt-3">
                     @csrf
                     <!-- Select gurukul -->
                     <div class="mb-3 center">
@@ -106,6 +106,16 @@
                         <span class="text-danger" id="name-error"></span>
                         <input type="text" id="name" name="name" placeholder="name" class="form-control" required><br>
                     </div>
+
+                    <div class="mb-3 center">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="email" class="form-control" required>
+                    </div>
+
+                    <!-- password -->
+                    <div class="mb-3 center">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="password " class="form-control" required>
+                    </div>
+
                     <div class="mb-3 center">
                         <input type="text" id="father_name"name="father_name" placeholder="father_name" class="form-control" required><br>
                     </div>
@@ -166,7 +176,7 @@
         <h3 class="text-center">Student Registration</h3>
         <a class="close" href="#">&times;</a>
         <div class="content">
-            <form id="studentforms" action="{{ route('student.store') }}" method="POST" class="form-control mx-auto mt-3 w-75">
+            <form id="studentforms" action="{{ route('student.storeAdmin') }}" method="POST" class="form-control mx-auto mt-3 w-75">
                 @csrf
                 <!-- select gurukul -->
                 <div class="mb-3 center">
