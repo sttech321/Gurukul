@@ -3,7 +3,9 @@
 @section('content')
 <div class="innerPageWrapper">
     <div class="box mb-4">
-        <a class="btn btn-primary" href="#popup1" onclick="openPopup('add')"> {{ __('messages.add_new_student') }}</a>
+        <button type="button" class="btn btn-primary btn-md" data-bs-toggle="modal" data-bs-target="#StudentPopupRegistration">
+            {{ __('messages.add_new_student') }}
+        </button>
     </div>
 
     <!-- Teacher List Table -->
@@ -24,8 +26,8 @@
     </div>
     @endif
 
-    <div class="panel-info-wrap">
-        <table class="table table-responsive panel-table">
+    <div class="panel-info-wrap table-responsive">
+        <table class="table panel-table">
             <thead class="">
                 <tr>
                     <th scope="col">
@@ -57,15 +59,17 @@
                     <td>
                         {{ $registration->aadhaar_card }}
                     </td>
-                    <td>
+                    <td class="addressField">
                         {{ $registration->home_address }}
                     </td>
                     <td>
-                        <a href="#popup2" class="edit-gurukul btn btn-primary" onclick="editstudentform({{ $registration->id }})">Edit</a>
+                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" onclick="editstudentform({{ $registration->id }})" data-bs-target="#StudentPopupRegistration2">
+                            Edit
+                        </button>
                         <form action="{{ route('student.destroyAdmin', $registration->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                         </form>
                     </td>
                 </tr>
@@ -74,206 +78,312 @@
         </table>
     </div>
 
-    <div id="popup1" class="overlay">
-        <div class="popup">
-            <h3 class="text-center">Student Registration</h3>
-            <a class="close" href="#">&times;</a>
-            <div class="content">
-                <form id="studentform" action="{{ route('student.storeAdmin') }}" method="POST" class="form-control mx-auto w-75 mt-3">
-                    @csrf
-                    <!-- Select gurukul -->
-                    <div class="mb-3 center">
-                        <!-- <span class="text-danger" id="gurukulid-error"></span> -->
-                        <select id="gurukulid" name="gurukulid" class="form-select form-control">
-                            <option value="">Select Gurukul</option>
-                            @foreach($gurukuls as $gurukul)
-                            <option value="{{ $gurukul->id }}">{{ $gurukul->gurukul_name  }}</option>
-                            @endforeach
-                        </select>
+    <div class="modal fade addContentModal" id="StudentPopupRegistration" tabindex="-1" aria-labelledby="StudentPopupRegistrationLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Student Registration</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="content">
+                        <form id="studentform" action="{{ route('student.storeAdmin') }}" method="POST" class="gurukul registration-content">
+                            <div class="row">
+                                @csrf
+                                <div class="col-12 col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Gurukul Id</label>
+                                        <select id="gurukulid" name="gurukulid" class="form-select form-control">
+                                            <option value="">Select Gurukul</option>
+                                            @foreach($gurukuls as $gurukul)
+                                            <option value="{{ $gurukul->id }}">{{ $gurukul->gurukul_name  }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Select Class</label>
+                                        <select id="gurukulclass" name="std_class" class="form-select form-control">
+                                            <option value="">Select class</option>
+                                            @foreach($Add_student_class as $class)
+                                            <option value="{{ $class->id }}">{{ $class->std_classes  }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3 center">
+                                    <!-- <span class="text-danger" id="gurukulclass-error"></span> -->
+                                    <select id="gurukulclass" name="std_class" class="form-select form-control">
+                                        <option value="">Select class</option> <!-- Optional placeholder option -->
+                                        @foreach($Add_student_class as $class)
+                                        <option value="{{ $class->id }}">{{ $class->std_classes  }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Name</label>
+                                        <span class="text-danger" id="name-error"></span>
+                                        <input type="text" id="name" name="name" placeholder="Name" class="form-control" required><br>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div>
+                                        <label class="form-label">Password</label>
+                                        <input type="password" class="form-control" id="password" name="password" placeholder="Password " class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Father Name</label>
+                                        <input type="text" id="father_name" name="father_name" placeholder="Father Name" class="form-control" required><br>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Mother Name</label>
+                                        <input type="text" id="mother_name" name="mother_name" placeholder="Mother Name" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">DOB</label>
+                                        <input type="date" id="date_of_birth" name="date_of_birth" placeholder="date_of_birth" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-12">
+                                    <div class="mb-3">
+                                        <label class="form-label">Aadhaar Card</label>
+                                        <input type="text" id="aadhaar_card" name="aadhaar_card" placeholder="Aadhaar Card" class="form-control" maxlength="12" required>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-12">
+                                    <div class="mb-3">
+                                        <label class="form-label">Home Address</label>
+                                        <textarea id="home_address" name="home_address" placeholder="Home Address" required class="form-control"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Father Dob</label>
+                                        <input type="date" id="father_dob" name="father_dob" placeholder="Father Dob" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Father Aadhaar Card</label>
+                                        <input type="text" id="father_aadhaar_card" name="father_aadhaar_card" placeholder="Father Aadhaar Card" class="form-control" maxlength="12" required>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Father Address</label>
+                                        <input type="text" id="father_address" name="father_address" placeholder="Father Address" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Father Mobile Number</label>
+                                        <input type="text" id="father_mobile_number" name="father_mobile_number" placeholder="Father Mobile Number" class="form-control" maxlength="10" required>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Father Profession</label>
+                                        <input type="text" id="father_profession" name="father_profession" placeholder="Father Profession" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Mother Dob</label>
+                                        <input type="date" id="mother_dob" name="mother_dob" placeholder="Mother Dob" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Mother Aadhaar Card</label>
+                                        <input type="text" name="mother_aadhaar_card" placeholder="Mother Aadhaar Card" class="form-control" maxlength="12" required>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Mother Address</label>
+                                        <input type="text" id="mother_address" name="mother_address" placeholder="Mother Address" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Mother Mobile Number</label>
+                                        <input type="text" id="mother_mobile_number" name="mother_mobile_number" placeholder="Mother Mobile Number" class="form-control" maxlength="10" required>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Mother Profession</label>
+                                        <input type="text" id="mother_profession" name="mother_profession" placeholder="Mother Profession" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-12 text-center">
+                                    <div class="submitBtnWrap mt-3 mb-2">
+                                        <button type="submit" id="submit-button" class="btn btn-primary btn-md px-4">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <!-- select class -->
-                    <div class="mb-3 center">
-                        <!-- <span class="text-danger" id="gurukulclass-error"></span> -->
-                        <select id="gurukulclass" name="std_class" class="form-select form-control">
-                            <option value="">Select class</option> <!-- Optional placeholder option -->
-                            @foreach($Add_student_class as $class)
-                            <option value="{{ $class->id }}">{{ $class->std_classes  }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <!-- Select Teacher (Populated via AJAX) -->
-                    <div class="mb-3">
-                        <select id="teacherid" name="teacherid" class="form-select form-control">
-                            <option value="">Select Teacher</option>
-                        </select>
-                    </div>
-                    <!-- Student Details -->
-                    <div class="mb-3 center">
-                        <span class="text-danger" id="name-error"></span>
-                        <input type="text" id="name" name="name" placeholder="name" class="form-control" required><br>
-                    </div>
-
-                    <div class="mb-3 center">
-                        <input type="email" class="form-control" id="email" name="email" placeholder="email" class="form-control" required>
-                    </div>
-
-                    <!-- password -->
-                    <div class="mb-3 center">
-                        <input type="password" class="form-control" id="password" name="password" placeholder="password " class="form-control" required>
-                    </div>
-
-                    <div class="mb-3 center">
-                        <input type="text" id="father_name" name="father_name" placeholder="father_name" class="form-control" required><br>
-                    </div>
-                    <div class="mb-3 center">
-                        <input type="text" id="mother_name" name="mother_name" placeholder="mother_name" class="form-control" required><br>
-                    </div>
-                    <div class="mb-3 center">
-                        <input type="date" id="date_of_birth" name="date_of_birth" placeholder="date_of_birth" class="form-control" required><br>
-                    </div>
-                    <div class="mb-3 center">
-                        <input type="text" id="aadhaar_card" name="aadhaar_card" placeholder="aadhaar_card" class="form-control" maxlength="12" required><br>
-                    </div>
-                    <div class="mb-3 center">
-                        <input type="text" id="home_address" name="home_address" placeholder="home_address" class="form-control" required><br>
-                    </div>
-                    <div class="mb-3 center">
-                        <h4>Father's Details</h4>
-                        <input type="date" id="father_dob" name="father_dob" placeholder="father_dob" class="form-control" required><br>
-                    </div>
-                    <div class="mb-3 center">
-                        <input type="text" id="father_aadhaar_card" name="father_aadhaar_card" placeholder="father_aadhaar_card" class="form-control" maxlength="12" required><br>
-                    </div>
-                    <div class="mb-3 center">
-                        <input type="text" id="father_address" name="father_address" placeholder="father_address" class="form-control" required><br>
-                    </div>
-                    <div class="mb-3 center">
-                        <input type="text" id="father_mobile_number" name="father_mobile_number" placeholder="father_mobile_number" class="form-control" maxlength="10" required><br>
-                    </div>
-                    <div class="mb-3 center">
-                        <input type="text" id="father_profession" name="father_profession" placeholder="father_profession" class="form-control" required><br>
-                    </div>
-                    <div class="mb-3 center">
-                        <h4 class="">Mother's Details</h4>
-
-                        <input type="date" id="mother_dob" name="mother_dob" placeholder="mother_dob" class="form-control" required><br>
-                    </div>
-                    <div class="mb-3 center">
-                        <input type="text" name="mother_aadhaar_card" placeholder="mother_aadhaar_card" class="form-control" maxlength="12" required><br>
-                    </div>
-                    <div class="mb-3 center">
-                        <input type="text" id="mother_address" name="mother_address" placeholder="mother_address" class="form-control" required><br>
-                    </div>
-                    <div class="mb-3 center">
-                        <input type="text" id="mother_mobile_number" name="mother_mobile_number" placeholder="mother_mobile_number" class="form-control" maxlength="10" required><br>
-                    </div>
-                    <div class="mb-3 center">
-                        <input type="text" id="mother_profession" name="mother_profession" placeholder="mother_profession" class="form-control" required><br>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary center mx-auto d-block w-50 form-control">Submit</button>
-                </form>
+                </div>
             </div>
         </div>
     </div>
 </div>
-<div id="popup2" class="overlay">
-    <div class="popup">
-        <h3 class="text-center">Student Registration</h3>
-        <a class="close" href="#">&times;</a>
-        <div class="content">
-            <form id="studentforms" action="{{ route('student.storeAdmin') }}" method="POST" class="form-control mx-auto mt-3 w-75">
-                @csrf
-                <!-- select gurukul -->
-                <div class="mb-3 center">
-                    <select id="gurukulid" name="gurukulid" class="form-select form-control">
-                        <option value="">Select Gurukul</option>
-                        @foreach($gurukuls as $gurukul)
-                        <option value="{{ $gurukul->id }}">{{ $gurukul->gurukul_name  }}</option>
-                        @endforeach
-                    </select>
-                </div>
 
-                <!-- select class -->
-                <div class="mb-3 center">
-                    <select id="gurukulclass" name="std_class" class="form-select form-control">
-                        <option value="">Select class</option> <!-- Optional placeholder option -->
-                        @foreach($Add_student_class as $class)
-                        <option value="{{ $class->id }}">{{ $class->std_classes  }}</option>
-                        @endforeach
-                    </select>
+<div class="modal fade addContentModal" id="StudentPopupRegistration2" tabindex="-1" aria-labelledby="StudentPopupRegistration2Label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Student Registration</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="content">
+                    <form id="studentforms" action="{{ route('student.storeAdmin') }}" method="POST" class="gurukul registration-content">
+                        <div class="row">
+                            @csrf
+                            <div class="col-12 col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Gurukul Id</label>
+                                    <select id="gurukulid" name="gurukulid" class="form-select form-control">
+                                        <option value="">Select Gurukul</option>
+                                        @foreach($gurukuls as $gurukul)
+                                        <option value="{{ $gurukul->id }}">{{ $gurukul->gurukul_name  }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Select Class</label>
+                                    <select id="gurukulclass" name="std_class" class="form-select form-control">
+                                        <option value="">Select class</option>
+                                        @foreach($Add_student_class as $class)
+                                        <option value="{{ $class->id }}">{{ $class->std_classes  }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Name</label>
+                                    <input type="hidden" name="formid" id="formid">
+                                    <input type="text" id="name" name="name" placeholder="Name" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Father Name</label>
+                                    <input type="text" id="father_name" name="father_name" placeholder="Father Name" class="form-control" required><br>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Mother Name</label>
+                                    <input type="text" id="mother_name" name="mother_name" placeholder="Mother Name" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">DOB</label>
+                                    <input type="date" id="date_of_birth" name="date_of_birth" placeholder="date_of_birth" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-12">
+                                <div class="mb-3">
+                                    <label class="form-label">Aadhaar Card</label>
+                                    <input type="text" id="aadhaar_card" name="aadhaar_card" placeholder="Aadhaar Card" class="form-control" maxlength="12" required>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-12">
+                                <div class="mb-3">
+                                    <label class="form-label">Home Address</label>
+                                    <textarea id="home_address" name="home_address" placeholder="Home Address" required class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Father Dob</label>
+                                    <input type="date" id="father_dob" name="father_dob" placeholder="Father Dob" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Father Aadhaar Card</label>
+                                    <input type="text" id="father_aadhaar_card" name="father_aadhaar_card" placeholder="Father Aadhaar Card" class="form-control" maxlength="12" required>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Father Address</label>
+                                    <input type="text" id="father_address" name="father_address" placeholder="Father Address" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Father Mobile Number</label>
+                                    <input type="text" id="father_mobile_number" name="father_mobile_number" placeholder="Father Mobile Number" class="form-control" maxlength="10" required>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Father Profession</label>
+                                    <input type="text" id="father_profession" name="father_profession" placeholder="Father Profession" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Mother Dob</label>
+                                    <input type="date" id="mother_dob" name="mother_dob" placeholder="Mother Dob" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Mother Aadhaar Card</label>
+                                    <input type="text" name="mother_aadhaar_card" placeholder="Mother Aadhaar Card" class="form-control" maxlength="12" required>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Mother Address</label>
+                                    <input type="text" id="mother_address" name="mother_address" placeholder="Mother Address" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Mother Mobile Number</label>
+                                    <input type="text" id="mother_mobile_number" name="mother_mobile_number" placeholder="Mother Mobile Number" class="form-control" maxlength="10" required>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Mother Profession</label>
+                                    <input type="text" id="mother_profession" name="mother_profession" placeholder="Mother Profession" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-12 text-center">
+                                <div class="submitBtnWrap mt-3 mb-2">
+                                    <button type="submit" id="submit-button" class="btn btn-primary btn-md px-4">Update</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <!-- Student Details -->
-                <div class="mb-3 center">
-                    <!-- <label>Name:</label> -->
-                    <input type="hidden" name="formid" id="formid">
-                    <input type="text" id="name" name="name" placeholder="name" class="form-control" required><br>
-                </div>
-                <div class="mb-3 center">
-                    <!-- <label>Father's Name:</label> -->
-                    <input type="text" id="father_name" name="father_name" placeholder="father_name" class="form-control" required><br>
-                </div>
-                <div class="mb-3 center">
-                    <!-- <label>Mother's Name:</label> -->
-                    <input type="text" id="mother_name" name="mother_name" placeholder="mother_name" class="form-control" required><br>
-                </div>
-                <div class="mb-3 center">
-                    <!-- <label>Date of Birth:</label> -->
-                    <input type="date" id="date_of_birth" name="date_of_birth" placeholder="date_of_birth" class="form-control" required><br>
-                </div>
-                <div class="mb-3 center">
-                    <!-- <label>Aadhaar Card:</label> -->
-                    <input type="text" id="aadhaar_card" name="aadhaar_card" placeholder="aadhaar_card" class="form-control" maxlength="12" required><br>
-                </div>
-                <div class="mb-3 center">
-                    <!-- <label>Home Address:</label> -->
-                    <input type="text" id="home_address" name="home_address" placeholder="home_address" class="form-control" required><br>
-                </div>
-                <div class="mb-3 center">
-                    <h4>Father's Details</h4>
-                    <!-- <label>Father's Date of Birth:</label> -->
-                    <input type="date" id="father_dob" name="father_dob" placeholder="father_dob" class="form-control" required><br>
-                </div>
-                <div class="mb-3 center">
-                    <!-- <label>Father's Aadhaar Card:</label> -->
-                    <input type="text" id="father_aadhaar_card" name="father_aadhaar_card" placeholder="father_aadhaar_card" class="form-control" maxlength="12" required><br>
-                </div>
-                <div class="mb-3 center">
-                    <!-- <label>Father's Address:</label> -->
-                    <input type="text" id="father_address" name="father_address" placeholder="father_address" class="form-control" required><br>
-                </div>
-                <div class="mb-3 center">
-                    <!-- <label>Father's Mobile Number:</label> -->
-                    <input type="text" id="father_mobile_number" name="father_mobile_number" placeholder="father_mobile_number" class="form-control" maxlength="10" required><br>
-                </div>
-                <div class="mb-3 center">
-                    <!-- <label>Father's Profession:</label> -->
-                    <input type="text" id="father_profession" name="father_profession" placeholder="father_profession" class="form-control" required><br>
-                </div>
-                <div class="mb-3 center">
-                    <h4 class="">Mother's Details</h4>
-                    <!-- <label>Mother's Date of Birth:</label> -->
-                    <input type="date" id="mother_dob" name="mother_dob" placeholder="mother_dob" class="form-control" required><br>
-                </div>
-                <div class="mb-3 center">
-                    <!-- <label>Mother's Aadhaar Card:</label> -->
-                    <input type="text" id="mother_aadhaar_card" name="mother_aadhaar_card" placeholder="mother_aadhaar_card" class="form-control" maxlength="12" required><br>
-                </div>
-                <div class="mb-3 center">
-                    <!-- <label>Mother's Address:</label> -->
-                    <input type="text" id="mother_address" name="mother_address" placeholder="mother_address" class="form-control" required><br>
-                </div>
-                <div class="mb-3 center">
-                    <!-- <label>Mother's Mobile Number:</label> -->
-                    <input type="text" id="mother_mobile_number" name="mother_mobile_number" placeholder="mother_mobile_number" class="form-control" maxlength="10" required><br>
-                </div>
-                <div class="mb-3 center">
-                    <!-- <label>Mother's Profession:</label> -->
-                    <input type="text" id="mother_profession" name="mother_profession" placeholder="mother_profession" class="form-control" required><br>
-                </div>
-                <button type="submit" class="btn btn-primary center form-control mx-auto d-block w-50">update</button>
-            </form>
+            </div>
         </div>
     </div>
 </div>

@@ -25,6 +25,10 @@ i{font-family: FontAwesome;font-style: normal;}
 
 .mx-700 { max-width: 700px!important; }
 
+.btn-check:focus+.btn, .btn:focus{
+	box-shadow: none !important;	
+}
+
 .form-control:focus { box-shadow: none!important; }
 
 .opacity-70{opacity: 0.7;}

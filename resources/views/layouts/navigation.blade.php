@@ -1,7 +1,7 @@
 <div class="headerTop">
     <div class="dropMenuWrap flexBetween">
         <div class="pageNameWrap">
-        <!-- <h5 class="secTitle">simple</h5>  -->
+            <h5 class="secTitle">Welcome to Gurukul</h5>
         </div>
         <!-- <div class="rightWrap">
             <div class="location-info flex flex-col justify-center items-end mr-10px">

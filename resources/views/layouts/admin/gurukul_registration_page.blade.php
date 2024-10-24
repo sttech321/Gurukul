@@ -26,8 +26,8 @@
     </div>
     @endif
 
-    <div class="panel-info-wrap">
-        <table class="table table-responsive panel-table">
+    <div class="panel-info-wrap table-responsive">
+        <table class="table panel-table">
             <thead class="panel-heading">
                 <tr>
                     <th scope="col">
@@ -53,7 +53,7 @@
                     <td>
                         {{ $registration->gurukul_name }}
                     </td>
-                    <td>
+                    <td class="addressField">
                         {{ $registration->address }}
                     </td>
                     <td>
